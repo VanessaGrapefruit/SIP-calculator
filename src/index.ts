@@ -1,3 +1,5 @@
+import './Styles/index.scss';
+
 const element = document.createElement("h1");
-element.textContent = "Hello World";
+element.textContent = "SIP-Калькулятор";
 document.body.appendChild(element);
