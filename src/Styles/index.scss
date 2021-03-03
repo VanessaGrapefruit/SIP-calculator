@@ -1,4 +1,7 @@
 @import './fonts.scss';
+@import './colors.scss';
+@import './externalNumbers.scss';
 body {
+    background-color: $bg-main;
     font-family: $proxima-black;
 }
