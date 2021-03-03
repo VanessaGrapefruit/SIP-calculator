@@ -1,5 +1,6 @@
 import { ExternalNumber } from "../Models/ExternalNumber";
 import renderElement from "../Utils/renderElement";
+import { PopupComponent } from "./PopupComponent";
 
 export class ExternalNumbersComponent {
     private numbers: ExternalNumber[];
@@ -11,6 +12,7 @@ export class ExternalNumbersComponent {
         this.numbers = numbers;
         this.parentElement = parentElement;
 
+        this.openPopup = this.openPopup.bind(this);
         this.onDescriptionMouseEnter = this.onDescriptionMouseEnter.bind(this);
     }
 
@@ -25,10 +27,15 @@ export class ExternalNumbersComponent {
     renderNumber(number: ExternalNumber,id: number) {
         const element = renderElement(this.container,'div',['external-number']);
         element.dataset.id = id.toString();
-        
+        element.addEventListener('click',this.openPopup);
+
         this.renderNumberImage(element,number);
         this.renderNumberContent(element,number);
         this.renderDescriptionButton(element,number);
+    }
+
+    openPopup() {
+        new PopupComponent(this.overlay).render();
     }
 
     renderNumberImage(element: HTMLElement,number: ExternalNumber) {
@@ -46,6 +53,8 @@ export class ExternalNumbersComponent {
 
     renderDescriptionButton(element: HTMLElement, number: ExternalNumber) {
         const mark = renderElement(element,'div',['description-mark']);
+        const img = renderElement(mark,'img',[]) as HTMLImageElement;
+        img.src = '../../public/images/question-mark.svg';
         mark.addEventListener('mouseenter',this.onDescriptionMouseEnter);
     }
 
@@ -60,9 +69,9 @@ export class ExternalNumbersComponent {
 
         const onmouseleave = () => {
             this.overlay.removeChild(description);
-            target.removeEventListener('mouseout',onmouseleave);
+            target.removeEventListener('mouseleave',onmouseleave);
         }
-        target.addEventListener('mouseout',onmouseleave);
+        target.addEventListener('mouseleave',onmouseleave);
     }
 
     getClosestContainer(target: HTMLElement) {

@@ -1,7 +1,21 @@
 @import './fonts.scss';
 @import './colors.scss';
 @import './externalNumbers.scss';
+@import './popup.scss';
 body {
-    background-color: $bg-main;
+    display: flex;
+    margin: 0;
     font-family: $proxima-black;
+}
+
+.left-container {
+    background-color: $bg-main;
+    width: calc(100% - #{$right-container-width});
+}
+
+.right-container {
+    width: $right-container-width;
+    height: 100vh;
+    background-color: $bg-side;
+    color: white;
 }
