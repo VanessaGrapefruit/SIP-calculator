@@ -1,5 +1,7 @@
 import { ExternalNumber } from "../Models/ExternalNumber";
+import { getNumberDescription } from "../Utils/getNumberDescription";
 import renderElement from "../Utils/renderElement";
+import { NumberPopupComponent } from "./NumbersPopupComponent";
 import { PopupComponent } from "./PopupComponent";
 
 export class ExternalNumbersComponent {
@@ -34,8 +36,11 @@ export class ExternalNumbersComponent {
         this.renderDescriptionButton(element,number);
     }
 
-    openPopup() {
-        new PopupComponent(this.overlay).render();
+    openPopup(e: MouseEvent) {
+        const target = e.target as HTMLElement;
+        const element = this.getClosestContainer(target);
+        const number = this.getExternalNumber(element);
+        new NumberPopupComponent(number,this.overlay).render();
     }
 
     renderNumberImage(element: HTMLElement,number: ExternalNumber) {
@@ -48,7 +53,7 @@ export class ExternalNumbersComponent {
         
         renderElement(container,'div',['level'],`Уровень ${number.level}`);
         renderElement(container,'div',['name'],number.name);
-        renderElement(container,'div',['cost'],`${number.firstCost} BYN`);
+        renderElement(container,'div',['cost'],`${number.numberFirstPay} BYN`);
     }
 
     renderDescriptionButton(element: HTMLElement, number: ExternalNumber) {
@@ -65,7 +70,7 @@ export class ExternalNumbersComponent {
 
         const description = renderElement(this.overlay,'div',['description']);
         description.style.left = `${target.offsetLeft}px`;
-        description.innerHTML = this.getDescription(number);
+        description.innerHTML = getNumberDescription(number);
 
         const onmouseleave = () => {
             this.overlay.removeChild(description);
@@ -81,9 +86,5 @@ export class ExternalNumbersComponent {
     getExternalNumber(element: HTMLElement) {
         const id = +element.dataset.id;
         return this.numbers[id];
-    }
-
-    getDescription(number: ExternalNumber) {
-        return `${number.description}<br>Пример:<br>${number.examples.join('<br>')}`;
     }
 }

@@ -10,6 +10,7 @@ export class PopupComponent {
         this.parentElement = parentElement;
 
         this.hide = this.hide.bind(this);
+        this.dispose = this.dispose.bind(this);
     }
 
     render() {
@@ -27,6 +28,10 @@ export class PopupComponent {
     dispose() {
         this.parentElement.removeChild(this.container);
         this.parentElement.removeChild(this.overlay);
+    }
+
+    addContainerStyle(className: string) {
+        this.container.classList.add(className);
     }
 
 }

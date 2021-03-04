@@ -4,6 +4,8 @@ export interface ExternalNumber {
     description: string;
     examples: string[];
     image: string;
-    firstCost: number;
-    monthlyFee: number;
+    numberFirstPay: number;
+    numberMonthlyFee: number;
+    trunkFirstPay: number;
+    trunkMonthlyFee: number
 }
