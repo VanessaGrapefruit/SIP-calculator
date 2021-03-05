@@ -2,6 +2,7 @@ import { ExternalNumber } from "../Models/ExternalNumber";
 import { getNumberDescription } from "../Utils/getNumberDescription";
 import renderElement from "../Utils/renderElement";
 import { PopupComponent } from "./PopupComponent";
+import Navigo from 'navigo';
 
 enum NumberCostOptions {
     number = 'number',
@@ -9,10 +10,10 @@ enum NumberCostOptions {
 }
 
 export class NumberPopupComponent extends PopupComponent {
-    private number: ExternalNumber
+    private number: ExternalNumber;
 
-    constructor(number: ExternalNumber,parentElement: HTMLElement) {
-        super(parentElement);
+    constructor(number: ExternalNumber,parentElement: HTMLElement,router: Navigo) {
+        super(parentElement,router);
 
         this.number = number;
     }
