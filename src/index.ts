@@ -4,6 +4,7 @@ import './Styles/index.scss';
 import renderElement from './Utils/renderElement';
 import Navigo from 'navigo';
 import { NumberPopupComponent } from './Components/NumbersPopupComponent';
+import { CartComponent } from './Components/CartComponent';
 
 const leftContainer = renderElement(document.body,'div',['left-container']);
 const rightContainer = renderElement(document.body,'div',['right-container']);
@@ -16,6 +17,8 @@ leftContainer.appendChild(element);
 
 const numbers = getExternalNumbers();
 new ExternalNumbersComponent(numbers,leftContainer,router).render();
+
+new CartComponent(rightContainer).render();
 
 router.on('/number/:id',function() {
     const id = +window.location.pathname.split('/').pop();
