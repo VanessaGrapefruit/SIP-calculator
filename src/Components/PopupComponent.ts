@@ -1,5 +1,5 @@
 import renderElement from "../Utils/renderElement";
-import Navigo from 'navigo';
+import Store from "../Utils/Store";
 
 
 export class PopupComponent {
@@ -7,11 +7,11 @@ export class PopupComponent {
     container: HTMLElement;
     overlay: HTMLElement;
 
-    router: Navigo;
+    store: Store;
 
-    constructor(parentElement: HTMLElement,router: Navigo) {
+    constructor(parentElement: HTMLElement,store: Store) {
         this.parentElement = parentElement;
-        this.router = router;
+        this.store = store;
 
         this.hide = this.hide.bind(this);
         this.dispose = this.dispose.bind(this);
@@ -33,7 +33,7 @@ export class PopupComponent {
         this.parentElement.removeChild(this.container);
         this.parentElement.removeChild(this.overlay);
 
-        this.router.navigate('/');
+        this.store.hidePopup();
     }
 
     addContainerStyle(className: string) {

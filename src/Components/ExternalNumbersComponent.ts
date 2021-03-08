@@ -1,9 +1,8 @@
 import { ExternalNumber } from "../Models/ExternalNumber";
 import { getNumberDescription } from "../Utils/getNumberDescription";
 import renderElement from "../Utils/renderElement";
-import { NumberPopupComponent } from "./NumbersPopupComponent";
-import { PopupComponent } from "./PopupComponent";
 import Navigo from 'navigo';
+import Store from "../Utils/Store";
 
 export class ExternalNumbersComponent {
     private numbers: ExternalNumber[];
@@ -11,12 +10,12 @@ export class ExternalNumbersComponent {
     private overlay: HTMLElement;
     private container: HTMLElement;
 
-    private router: Navigo
+    private store: Store;
 
-    constructor(numbers: ExternalNumber[],parentElement: HTMLElement,router: Navigo) {
+    constructor(numbers: ExternalNumber[],parentElement: HTMLElement,store: Store) {
         this.numbers = numbers;
         this.parentElement = parentElement;
-        this.router = router;
+        this.store = store;
 
         this.openPopup = this.openPopup.bind(this);
         this.onDescriptionMouseEnter = this.onDescriptionMouseEnter.bind(this);
@@ -44,7 +43,7 @@ export class ExternalNumbersComponent {
         const target = e.target as HTMLElement;
         const element = this.getClosestContainer(target);
         const id = element.dataset.id;
-        this.router.navigate(`/number/${id}`);
+        this.store.openExternalNumber(id);
     }
 
     renderNumberImage(element: HTMLElement,number: ExternalNumber) {

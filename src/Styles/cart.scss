@@ -13,10 +13,63 @@
         margin-bottom: 50px;
     }
     .numbers-container {
-        background-color: rgba($color: $bg-second, $alpha: 0.05);
+        background-color: rgba($color: $bg-second, $alpha: 0.01);
         border-radius: 10px;
-        min-height: 37vh;
+        height: 37vh;
         margin-bottom: 20px;
+        overflow-y: scroll;
+        &:empty {
+            background-color: rgba($color: $bg-second, $alpha: 0.05);
+        }
+        &::-webkit-scrollbar {
+            width: 0;
+        }
+        .number {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-left: 10px;
+            margin-bottom: 5px;
+            background-color: rgba($color: $bg-second, $alpha: 0.04);
+            border-radius: 10px;
+            .container {
+                display: flex;
+                align-items: center;
+                div.image {
+                    padding: 15px;
+                    margin-right: 20px;
+                    img {
+                        width: 71px;
+                        height: 66px;
+                    }
+                }
+                .content {
+                    color: $color-white;
+                    .name {
+                        font-family: $open-sans-semibold;
+                        font-size: 18px;
+                    }
+                    .count {
+                        font-family: $open-sans-regular;
+                        font-size: 12px;
+                        line-height: 21px;
+                        letter-spacing: 0.02px;
+                        opacity: 0.7;
+                    }
+                }
+            }
+            .btns-container {
+                .btn {
+                    background-color: rgba($color: $bg-second, $alpha: 0.01);
+                    padding: 20px;
+                    img {
+                        width: 20px;
+                        height: 20px;
+                        opacity: 0.4;
+                    }
+                }
+            }
+        }
     }
     .package-container {
         background-color: rgba($color: $bg-second, $alpha: 0.05);
@@ -71,6 +124,21 @@
         .header {
             margin-bottom: 30px;
             font-size: 20px;
+        }
+        .numbers-container {
+            .number {
+                .container {
+                    div.image {
+                        padding: 5px;
+                        margin-right: 10px;
+                    }
+                }
+                .btns-container {
+                    .btn {
+                        padding: 15px;
+                    }
+                }
+            }
         }
         .package-container {
             padding: 20px;

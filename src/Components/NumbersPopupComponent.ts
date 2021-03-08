@@ -2,7 +2,8 @@ import { ExternalNumber } from "../Models/ExternalNumber";
 import { getNumberDescription } from "../Utils/getNumberDescription";
 import renderElement from "../Utils/renderElement";
 import { PopupComponent } from "./PopupComponent";
-import Navigo from 'navigo';
+import Store from "../Utils/Store";
+import { NumberOrder } from "../Models/NumberOrder";
 
 enum NumberCostOptions {
     number = 'number',
@@ -12,10 +13,14 @@ enum NumberCostOptions {
 export class NumberPopupComponent extends PopupComponent {
     private number: ExternalNumber;
 
-    constructor(number: ExternalNumber,parentElement: HTMLElement,router: Navigo) {
-        super(parentElement,router);
+    private numbersInput: HTMLInputElement;
+    private trunksInput: HTMLInputElement;
+
+    constructor(number: ExternalNumber,parentElement: HTMLElement,store: Store) {
+        super(parentElement,store);
 
         this.number = number;
+        this.addToCart = this.addToCart.bind(this);
     }
 
     render() {
@@ -51,11 +56,11 @@ export class NumberPopupComponent extends PopupComponent {
     }
 
     renderNumberSelection() {
-        this.renderSelection('Количество номеров',NumberCostOptions.number,4);
+        this.numbersInput = this.renderSelection('Количество номеров',NumberCostOptions.number,4);
     }
 
     renderTrunkSelection() {
-        this.renderSelection('Количество линий (Всего)',NumberCostOptions.trunk,16);
+        this.trunksInput = this.renderSelection('Количество линий (Всего)',NumberCostOptions.trunk,16);
     }
 
     renderSelection(title: string,options: NumberCostOptions,value: number) {
@@ -73,13 +78,14 @@ export class NumberPopupComponent extends PopupComponent {
             renderElement(cost,'div',[],`Абонентская плата: ${this.number.trunkMonthlyFee} BYN`);
         }
 
-        this.renderInput(container,value);
+        return this.renderInput(container,value);
     }
 
     renderInput(parent: HTMLElement,value: number) {
         const input = renderElement(parent,'input',[]) as HTMLInputElement;
         input.type = 'number';
         input.value = value.toString();
+        return input;
     }
 
     renderDividingLine() {
@@ -93,5 +99,16 @@ export class NumberPopupComponent extends PopupComponent {
         cancel.addEventListener('click',this.dispose);
         
         const add = renderElement(container,'div',['btn','btn-add'],'Добавить');
+        add.addEventListener('click',this.addToCart);
+    }
+
+    addToCart() {
+        const order : NumberOrder = {
+            number: this.number,
+            numsCount: +this.numbersInput.value,
+            trunksCount: +this.trunksInput.value,
+        }
+        this.store.addNumberToCart(order);
+        this.dispose();
     }
 }

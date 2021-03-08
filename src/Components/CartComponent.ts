@@ -1,3 +1,5 @@
+import { ExternalNumber } from "../Models/ExternalNumber";
+import { NumberOrder } from "../Models/NumberOrder";
 import renderElement from "../Utils/renderElement";
 
 export class CartComponent {
@@ -8,6 +10,8 @@ export class CartComponent {
 
     constructor(parentElement: HTMLElement) {
         this.parentElement = parentElement;
+
+        this.removeNumber = this.removeNumber.bind(this);
     }
 
     render() {
@@ -55,5 +59,37 @@ export class CartComponent {
         renderElement(content,'div',['desc'],desc);
 
         renderElement(container,'div',['value'],value);
+    }
+
+    addNumber(order: NumberOrder) {
+        const element = renderElement(this.numberContainer,'div',['number']);
+        const div = renderElement(element,'div',['container']);
+
+        const imageDiv = renderElement(div,'div',['image']);
+        const img = renderElement(imageDiv,'img',[]) as HTMLImageElement;
+        img.src = `../../public/images/${order.number.image}`;
+
+        const content = renderElement(div,'div',['content']);
+        renderElement(content,'div',['name'],`${order.number.name} номер`);
+        renderElement(content,'div',['count'],`Количество номеров: ${order.numsCount}`);
+        renderElement(content,'div',['count'],`Количество линий: ${order.trunksCount}`);
+
+        const buttons = renderElement(element,'div',['btns-container']);
+        const editBtn = renderElement(buttons,'div',['btn']);
+        const deleteBtn = renderElement(buttons,'div',['btn']);
+
+        const editIcon = renderElement(editBtn,'img',['icon']) as HTMLImageElement;
+        const deleteIcon = renderElement(deleteBtn,'img',['icon']) as HTMLImageElement;
+
+        deleteBtn.addEventListener('click',this.removeNumber);
+
+        editIcon.src = '../../public/images/edit.svg';
+        deleteIcon.src = '../../public/images/delete.svg';
+    }
+
+    removeNumber(e: MouseEvent) {
+        const target = e.target as HTMLElement;
+        const element = target.closest('.number') as HTMLElement;
+        this.numberContainer.removeChild(element);
     }
 }
