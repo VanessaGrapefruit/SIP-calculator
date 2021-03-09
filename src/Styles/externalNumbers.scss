@@ -59,8 +59,9 @@
 }
 
 .external-numbers__overlay {
+    margin-bottom: 70px;
     .description {
-        position: relative;
+        position: absolute;
         top: -36px;
         background-color: $color-white;
         border-radius: 10px;
@@ -71,5 +72,25 @@
         color: $font-first;
         font-family: $open-sans-regular;
         font-size: 14px;
+    }
+}
+
+@media(max-width: 1550px) {
+    .external-numbers__overlay {
+        margin-bottom: 50px;
+    }
+    .external-numbers__container {
+        .external-number {
+            img {
+                width: 61px;
+                height: 56px;
+            }
+            .content {
+                font-size: 9px;
+                .name {
+                    font-size: 15px;
+                }
+            }
+        }
     }
 }

@@ -73,6 +73,7 @@ export class ExternalNumbersComponent {
 
         const description = renderElement(this.overlay,'div',['description']);
         description.style.left = `${target.offsetLeft}px`;
+        description.style.top = `${target.offsetTop + target.offsetHeight}px`;
         description.innerHTML = getNumberDescription(number);
 
         const onmouseleave = () => {

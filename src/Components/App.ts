@@ -1,11 +1,14 @@
 import Navigo from "navigo";
 import { ExternalNumber } from "../Models/ExternalNumber";
 import { getExternalNumbers } from "../Services/ExternalNumbersService";
+import getPBXPackages from "../Services/PBXPackageService";
 import renderElement from "../Utils/renderElement";
 import Store, { EVENTS } from "../Utils/Store";
+import { PBXPackagesComponent } from "./BPXPackagesComponent";
 import { CartComponent } from "./CartComponent";
 import { ExternalNumbersComponent } from "./ExternalNumbersComponent";
 import { NumberPopupComponent } from "./NumbersPopupComponent";
+import { PackagesTableComponent } from "./PackagesTableComponent";
 
 export class App {
     parentElement: HTMLElement;
@@ -28,7 +31,8 @@ export class App {
     }
 
     render() {
-        this.leftContainer = renderElement(this.parentElement,'div',['left-container']);
+        const container = renderElement(this.parentElement,'div',['left-container']);
+        this.leftContainer = renderElement(container,'div',['wrapper']);
         this.rightContainer = renderElement(this.parentElement,'div',['right-container']);
 
         this.renderOffers();
@@ -40,8 +44,14 @@ export class App {
     }
 
     renderOffers() {
+        renderElement(this.leftContainer,'div',['header-title'],'SIP-Калькулятор');
+        renderElement(this.leftContainer,'div',['numbers-subtitle'],'Внешние номера');
+
         this.numbers = getExternalNumbers();
         new ExternalNumbersComponent(this.numbers,this.leftContainer,this.store).render();
+
+        const packageSet = getPBXPackages();
+        new PBXPackagesComponent(packageSet,this.leftContainer,this.store).render();
     }
 
     renderCart() {

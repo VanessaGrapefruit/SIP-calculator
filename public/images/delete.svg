@@ -1,1 +1,17 @@
-<svg id="Capa_1" enable-background="new 0 0 515.556 515.556" height="512" viewBox="0 0 515.556 515.556" width="512" xmlns="http://www.w3.org/2000/svg"><path d="m64.444 451.111c0 35.526 28.902 64.444 64.444 64.444h257.778c35.542 0 64.444-28.918 64.444-64.444v-322.222h-386.666z"/><path d="m322.222 32.222v-32.222h-128.889v32.222h-161.111v64.444h451.111v-64.444z"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_1975" data-name="Rectangle 1975" width="20" height="20" fill="#fff" stroke="#707070" stroke-width="1"/>
+    </clipPath>
+  </defs>
+  <g id="Delete" opacity="0.1" clip-path="url(#clip-path)">
+    <g id="delete-2" data-name="delete" transform="translate(1.836)">
+      <g id="Group_5381" data-name="Group 5381">
+        <g id="Group_5380" data-name="Group 5380">
+          <path id="Path_1887" data-name="Path 1887" d="M3.333,17.778A2.222,2.222,0,0,0,5.556,20h8.889a2.222,2.222,0,0,0,2.222-2.222V4.444H3.333Z" transform="translate(-2.222)" fill="#fff"/>
+          <path id="Path_1888" data-name="Path 1888" d="M13.889,1.111,12.778,0H7.222L6.111,1.111H2.222V3.333H17.778V1.111Z" transform="translate(-2.222)" fill="#fff"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
