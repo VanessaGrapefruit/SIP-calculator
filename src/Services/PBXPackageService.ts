@@ -8,28 +8,40 @@ const packageSet: PackageSet = {
     packages: [
         {
             name: 'BASIC',
-            description: '',
+            description: 'Стандартный пакет. включенный в каждый тарифный план SIP',
+            isDefault: true,
+            firstPay: 12,
+            monthlyFee: 4,
             functions: [
                 {id: 1, included: true},{id:2,included: true},{id:3,included: false},{id:4,included: false},{id:5,included: false},{id:6,included: false},{id:7,included: false}
             ]
         },
         {
             name: 'Package 1',
-            description: '',
+            description: 'Стандартный пакет. включенный в каждый тарифный план SIP',
+            isDefault: false,
+            firstPay: 12,
+            monthlyFee: 4,
             functions: [
-                {id: 1, included: true},{id:2,included: true},{id:3,included: false},{id:4,included: false},{id:5,included: false},{id:6,included: false},{id:7,included: false}            ]
+                {id: 1, included: true},{id:2,included: true},{id:3,included: true},{id:4,included: false},{id:5,included: false},{id:6,included: false},{id:7,included: false}            ]
         },
         {
             name: 'Package 2',
-            description: '',
+            description: 'Стандартный пакет. включенный в каждый тарифный план SIP',
+            isDefault: false,
+            firstPay: 12,
+            monthlyFee: 4,
             functions: [
-                {id: 1, included: true},{id:2,included: true},{id:3,included: false},{id:4,included: false},{id:5,included: false},{id:6,included: false},{id:7,included: false}            ]
+                {id: 1, included: true},{id:2,included: true},{id:3,included: true},{id:4,included: true},{id:5,included: true},{id:6,included: false},{id:7,included: false}            ]
         },
         {
             name: 'Package 3',
-            description: '',
+            description: 'Стандартный пакет. включенный в каждый тарифный план SIP',
+            isDefault: false,
+            firstPay: 12,
+            monthlyFee: 4,
             functions: [
-                {id: 1, included: true},{id:2,included: true},{id:3,included: false},{id:4,included: false},{id:5,included: false},{id:6,included: false},{id:7,included: false}            ]
+                {id: 1, included: true},{id:2,included: true},{id:3,included: true},{id:4,included: true},{id:5,included: true},{id:6,included: true},{id:7,included: true}            ]
         },
     ],
     functions: [

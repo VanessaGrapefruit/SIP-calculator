@@ -6,6 +6,9 @@ export interface PackageSet {
 export interface PBXPackage {
     name: string;
     description: string;
+    isDefault: boolean;
+    firstPay: number;
+    monthlyFee: number;
     functions: PBXFunctionState[];
 }
 

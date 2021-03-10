@@ -1,6 +1,8 @@
 import { ExternalNumber } from "../Models/ExternalNumber";
 import { NumberOrder } from "../Models/NumberOrder";
+import { PackageOrder } from "../Models/PackageOrder";
 import renderElement from "../Utils/renderElement";
+import Store, { EVENTS } from "../Utils/Store";
 
 export class CartComponent {
     parentElement: HTMLElement;
@@ -8,10 +10,15 @@ export class CartComponent {
     numberContainer: HTMLElement;
     packageContainer: HTMLElement;
 
-    constructor(parentElement: HTMLElement) {
+    store: Store;
+
+    constructor(parentElement: HTMLElement, store: Store) {
         this.parentElement = parentElement;
+        this.store = store;
 
         this.removeNumber = this.removeNumber.bind(this);
+        this.removePackage = this.removePackage.bind(this);
+        this.togglePackageContainer = this.togglePackageContainer.bind(this);
     }
 
     render() {
@@ -23,6 +30,8 @@ export class CartComponent {
 
         this.renderFistPay();
         this.renderMonthlyFee();
+
+        this.store.eventEmmiter.addEvent(EVENTS.PBX_CHECKBOX_TOGGLED,this.togglePackageContainer);
     }
 
     renderHeader() {
@@ -36,9 +45,6 @@ export class CartComponent {
 
     renderPackageContainer() {
         this.packageContainer = renderElement(this.container,'div',['package-container']);
-        renderElement(this.packageContainer,'div',['title'],'BASIC');
-        renderElement(this.packageContainer,'div',['content'],
-            'Стандартный пакет. включенный в каждый тарифный план SIP');
     }
 
     renderFistPay() {
@@ -91,5 +97,33 @@ export class CartComponent {
         const target = e.target as HTMLElement;
         const element = target.closest('.number') as HTMLElement;
         this.numberContainer.removeChild(element);
+    }
+
+    addPackage(order: PackageOrder) {
+        this.packageContainer.innerHTML = '';
+        const pack = order.package;
+
+        const topContainer = renderElement(this.packageContainer,'div',['container']);
+        const botContainer = renderElement(this.packageContainer,'div',['container']);
+
+        renderElement(topContainer,'div',['title'],pack.name);
+        renderElement(botContainer,'div',['description'],pack.description);
+
+        if(pack.isDefault) return;
+        renderElement(topContainer,'div',['employees'],`Сотрудников: ${order.employees}`);
+
+        const deleteBtn = renderElement(botContainer,'div',['btn']);
+        const icon = renderElement(deleteBtn,'img',[]) as HTMLImageElement;
+        icon.src = '../../public/images/delete.svg';
+        deleteBtn.addEventListener('click',this.removePackage);
+    }
+
+    removePackage(e: MouseEvent) {
+        this.packageContainer.innerHTML = '';
+        this.store.removePackageFromCart();
+    }
+
+    togglePackageContainer() {
+        this.packageContainer.classList.toggle('disabled');
     }
 }

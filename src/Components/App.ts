@@ -1,5 +1,7 @@
 import Navigo from "navigo";
 import { ExternalNumber } from "../Models/ExternalNumber";
+import { PackageOrder } from "../Models/PackageOrder";
+import { PackageSet } from "../Models/PBXPackage";
 import { getExternalNumbers } from "../Services/ExternalNumbersService";
 import getPBXPackages from "../Services/PBXPackageService";
 import renderElement from "../Utils/renderElement";
@@ -15,6 +17,7 @@ export class App {
     store: Store;
     router: Navigo;
     numbers: ExternalNumber[];
+    packageSet: PackageSet;
 
     leftContainer: HTMLElement;
     rightContainer: HTMLElement;
@@ -28,6 +31,8 @@ export class App {
 
         this.openExternalNumber = this.openExternalNumber.bind(this);
         this.addNumberToCart = this.addNumberToCart.bind(this);
+        this.addPackageToCart = this.addPackageToCart.bind(this);
+        this.addDefaultPackage = this.addDefaultPackage.bind(this);
     }
 
     render() {
@@ -41,6 +46,8 @@ export class App {
         this.initRoutes();
 
         this.store.eventEmmiter.addEvent(EVENTS.ADD_NUMBER_TO_CART,this.addNumberToCart);
+        this.store.eventEmmiter.addEvent(EVENTS.ADD_PACKAGE_TO_CART,this.addPackageToCart);
+        this.store.eventEmmiter.addEvent(EVENTS.PACKAGE_REMOVED,this.addDefaultPackage);
     }
 
     renderOffers() {
@@ -49,14 +56,26 @@ export class App {
 
         this.numbers = getExternalNumbers();
         new ExternalNumbersComponent(this.numbers,this.leftContainer,this.store).render();
+      
+        this.packageSet = getPBXPackages();
+        new PBXPackagesComponent(this.packageSet,this.leftContainer,this.store).render();
 
-        const packageSet = getPBXPackages();
-        new PBXPackagesComponent(packageSet,this.leftContainer,this.store).render();
+        const logo = renderElement(this.leftContainer,'img',['logo']) as HTMLImageElement;
+        logo.src = '../../public/images/logo.svg';
     }
 
     renderCart() {
-        this.cart = new CartComponent(this.rightContainer);
+        this.cart = new CartComponent(this.rightContainer,this.store);
         this.cart.render();
+        this.addDefaultPackage();
+    }
+
+    addDefaultPackage() {
+        const order: PackageOrder = {
+            package: this.packageSet.packages[0],
+            employees: 4,  
+        }
+        this.cart.addPackage(order);
     }
 
     initRoutes() {
@@ -76,5 +95,10 @@ export class App {
     addNumberToCart() {
         const order = this.store.numberOrder;
         this.cart.addNumber(order);
+    }
+
+    addPackageToCart() {
+        const order = this.store.packageOrder;
+        this.cart.addPackage(order);
     }
 }

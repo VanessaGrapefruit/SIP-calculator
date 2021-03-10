@@ -1,10 +1,14 @@
 import Navigo from "navigo";
 import { NumberOrder } from "../Models/NumberOrder";
+import { PackageOrder } from "../Models/PackageOrder";
 import EventEmitter from "./EventEmmiter";
 
 export enum EVENTS {
     OPEN_EXTERNAL_NUMBER = 'OPEN_EXTERNAL_NUMBER',
     ADD_NUMBER_TO_CART = 'ADD_NUMBER_TO_CART',
+    ADD_PACKAGE_TO_CART = 'ADD_PACKAGE_TO_CART',
+    PACKAGE_REMOVED = 'PACKAGE_REMOVED',
+    PBX_CHECKBOX_TOGGLED = 'PBX_CHECKBOX_TOGGLED',
 }
 
 export default class Store {
@@ -12,6 +16,7 @@ export default class Store {
     router: Navigo;
 
     numberOrder: NumberOrder;
+    packageOrder: PackageOrder;
 
     constructor(router: Navigo) {
         this.eventEmmiter = new EventEmitter();
@@ -29,5 +34,19 @@ export default class Store {
     addNumberToCart(order: NumberOrder) {
         this.numberOrder = order;
         this.eventEmmiter.emit(EVENTS.ADD_NUMBER_TO_CART);
+    }
+
+    addPackageToCart(order: PackageOrder) {
+        this.packageOrder = order;
+        this.eventEmmiter.emit(EVENTS.ADD_PACKAGE_TO_CART);
+    }
+
+    removePackageFromCart() {
+        this.eventEmmiter.emit(EVENTS.PACKAGE_REMOVED);
+    }
+
+    tooglePBXCheckbox() {
+        console.log('toggle from store');
+        this.eventEmmiter.emit(EVENTS.PBX_CHECKBOX_TOGGLED);
     }
 }
