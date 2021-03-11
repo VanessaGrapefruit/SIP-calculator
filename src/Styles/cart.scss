@@ -68,6 +68,7 @@
         background-color: rgba($color: $bg-second, $alpha: 0.05);
         border-radius: 10px;
         padding: 30px;
+        min-height: 8vh;
         color: $color-white;
         .container {
             display: flex;
@@ -94,6 +95,9 @@
                 line-height: 24px;
                 opacity: 0.3;
                 letter-spacing: 0.28px;
+            }
+            .btn {
+                margin: 0 -30px -30px 0;
             }
         }
     }

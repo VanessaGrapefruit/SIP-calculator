@@ -9,39 +9,39 @@ const packageSet: PackageSet = {
         {
             name: 'BASIC',
             description: 'Стандартный пакет. включенный в каждый тарифный план SIP',
-            isDefault: true,
+            //isDefault: true,
             firstPay: 12,
             monthlyFee: 4,
             functions: [
-                {id: 1, included: true},{id:2,included: true},{id:3,included: false},{id:4,included: false},{id:5,included: false},{id:6,included: false},{id:7,included: false}
+                {functionId: 1, included: true},{functionId:2,included: true},{functionId:3,included: false},{functionId:4,included: false},{functionId:5,included: false},{functionId:6,included: false},{functionId:7,included: false}
             ]
         },
         {
             name: 'Package 1',
             description: 'Стандартный пакет. включенный в каждый тарифный план SIP',
-            isDefault: false,
+            //isDefault: false,
             firstPay: 12,
             monthlyFee: 4,
             functions: [
-                {id: 1, included: true},{id:2,included: true},{id:3,included: true},{id:4,included: false},{id:5,included: false},{id:6,included: false},{id:7,included: false}            ]
+                {functionId: 1, included: true},{functionId:2,included: true},{functionId:3,included: true},{functionId:4,included: false},{functionId:5,included: false},{functionId:6,included: false},{functionId:7,included: false}            ]
         },
         {
             name: 'Package 2',
             description: 'Стандартный пакет. включенный в каждый тарифный план SIP',
-            isDefault: false,
+            //isDefault: false,
             firstPay: 12,
             monthlyFee: 4,
             functions: [
-                {id: 1, included: true},{id:2,included: true},{id:3,included: true},{id:4,included: true},{id:5,included: true},{id:6,included: false},{id:7,included: false}            ]
+                {functionId: 1, included: true},{functionId:2,included: true},{functionId:3,included: true},{functionId:4,included: true},{functionId:5,included: true},{functionId:6,included: false},{functionId:7,included: false}            ]
         },
         {
             name: 'Package 3',
             description: 'Стандартный пакет. включенный в каждый тарифный план SIP',
-            isDefault: false,
+            //isDefault: false,
             firstPay: 12,
             monthlyFee: 4,
             functions: [
-                {id: 1, included: true},{id:2,included: true},{id:3,included: true},{id:4,included: true},{id:5,included: true},{id:6,included: true},{id:7,included: true}            ]
+                {functionId: 1, included: true},{functionId:2,included: true},{functionId:3,included: true},{functionId:4,included: true},{functionId:5,included: true},{functionId:6,included: true},{functionId:7,included: true}            ]
         },
     ],
     functions: [

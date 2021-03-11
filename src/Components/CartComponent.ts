@@ -109,7 +109,7 @@ export class CartComponent {
         renderElement(topContainer,'div',['title'],pack.name);
         renderElement(botContainer,'div',['description'],pack.description);
 
-        if(pack.isDefault) return;
+        //if(pack.isDefault) return;
         renderElement(topContainer,'div',['employees'],`Сотрудников: ${order.employees}`);
 
         const deleteBtn = renderElement(botContainer,'div',['btn']);
@@ -120,7 +120,6 @@ export class CartComponent {
 
     removePackage(e: MouseEvent) {
         this.packageContainer.innerHTML = '';
-        this.store.removePackageFromCart();
     }
 
     togglePackageContainer() {

@@ -6,14 +6,14 @@ export interface PackageSet {
 export interface PBXPackage {
     name: string;
     description: string;
-    isDefault: boolean;
+    //isDefault: boolean;
     firstPay: number;
     monthlyFee: number;
     functions: PBXFunctionState[];
 }
 
 export interface PBXFunctionState{
-    id: number;
+    functionId: number;
     included: boolean;
 }
 

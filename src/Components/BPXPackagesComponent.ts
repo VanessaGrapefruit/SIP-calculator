@@ -6,7 +6,9 @@ import { PackagesTableComponent } from "./PackagesTableComponent";
 
 export class PBXPackagesComponent extends PackagesTableComponent {
     container: HTMLElement;
+    employeesContainer: HTMLElement;
     employeesInput: HTMLInputElement;
+    overlay: HTMLElement;
 
     isDiabled: boolean = false;
 
@@ -23,6 +25,11 @@ export class PBXPackagesComponent extends PackagesTableComponent {
         this.renderEmploeesSelection();
 
         super.render();
+
+        window.addEventListener('resize',() => {
+            this.toggleInteraction();
+            this.toggleInteraction();
+        })
     }
 
     renderTitle() {
@@ -44,13 +51,13 @@ export class PBXPackagesComponent extends PackagesTableComponent {
     }
 
     renderEmploeesSelection() {
-        const container = renderElement(this.container,'div',['employees']);
+        this.employeesContainer = renderElement(this.container,'div',['employees']);
 
-        const content = renderElement(container,'div',['content']);
+        const content = renderElement(this.employeesContainer,'div',['content']);
         renderElement(content,'div',['title'],'Количество сотрудников');
         renderElement(content,'div',['subtitle'],'Необходимо указать для расчета стоимости пакета');
 
-        this.employeesInput = renderElement(container,'input',[]) as HTMLInputElement;
+        this.employeesInput = renderElement(this.employeesContainer,'input',[]) as HTMLInputElement;
         this.employeesInput.value = '4';
         this.employeesInput.type = 'number';
     }
@@ -64,5 +71,20 @@ export class PBXPackagesComponent extends PackagesTableComponent {
             employees: +this.employeesInput.value
         }
         this.store.addPackageToCart(order);
+    }
+
+    disable() {
+        this.overlay = renderElement(this.employeesContainer,'div',['packages-overlay']);
+        this.overlay.style.left = `${this.employeesContainer.offsetLeft}px`;
+        this.overlay.style.top = `${this.employeesContainer.offsetTop}px`;
+        this.overlay.style.width = `${this.employeesContainer.offsetWidth}px`;
+        this.overlay.style.height = `${this.employeesContainer.offsetHeight}px`;
+
+        super.disable();
+    }
+
+    enable() {
+        this.employeesContainer.removeChild(this.overlay);
+        super.enable();
     }
 }

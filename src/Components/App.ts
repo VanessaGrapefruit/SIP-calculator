@@ -32,7 +32,6 @@ export class App {
         this.openExternalNumber = this.openExternalNumber.bind(this);
         this.addNumberToCart = this.addNumberToCart.bind(this);
         this.addPackageToCart = this.addPackageToCart.bind(this);
-        this.addDefaultPackage = this.addDefaultPackage.bind(this);
     }
 
     render() {
@@ -47,7 +46,6 @@ export class App {
 
         this.store.eventEmmiter.addEvent(EVENTS.ADD_NUMBER_TO_CART,this.addNumberToCart);
         this.store.eventEmmiter.addEvent(EVENTS.ADD_PACKAGE_TO_CART,this.addPackageToCart);
-        this.store.eventEmmiter.addEvent(EVENTS.PACKAGE_REMOVED,this.addDefaultPackage);
     }
 
     renderOffers() {
@@ -67,15 +65,6 @@ export class App {
     renderCart() {
         this.cart = new CartComponent(this.rightContainer,this.store);
         this.cart.render();
-        this.addDefaultPackage();
-    }
-
-    addDefaultPackage() {
-        const order: PackageOrder = {
-            package: this.packageSet.packages[0],
-            employees: 4,  
-        }
-        this.cart.addPackage(order);
     }
 
     initRoutes() {

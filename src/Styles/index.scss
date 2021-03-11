@@ -13,7 +13,7 @@ body {
 .left-container {
     background-color: $bg-main;
     width: calc(100% - #{$right-container-width});
-    overflow-y: scroll;
+    //overflow-y: scroll;
     height: 100vh;
     &::-webkit-scrollbar {
         width: 0px;
@@ -43,6 +43,9 @@ body {
 }
 
 .right-container {
+    position: fixed;
+    top: 0;
+    right: 0;
     width: $right-container-width;
     height: 100vh;
     background-color: $bg-side;

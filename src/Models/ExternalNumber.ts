@@ -7,5 +7,5 @@ export interface ExternalNumber {
     numberFirstPay: number;
     numberMonthlyFee: number;
     trunkFirstPay: number;
-    trunkMonthlyFee: number
+    trunkMonthlyFee: number;
 }
