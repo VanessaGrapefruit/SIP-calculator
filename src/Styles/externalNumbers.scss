@@ -62,6 +62,7 @@
     margin-bottom: 70px;
     .description {
         position: absolute;
+        z-index: 15;
         top: -36px;
         background-color: $color-white;
         border-radius: 10px;

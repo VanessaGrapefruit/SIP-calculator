@@ -1,6 +1,7 @@
 import { ExternalNumber } from "../Models/ExternalNumber";
 import { NumberOrder } from "../Models/NumberOrder";
 import { PackageOrder } from "../Models/PackageOrder";
+import { CalculationService } from "../Services/CalculationService";
 import renderElement from "../Utils/renderElement";
 import Store, { EVENTS } from "../Utils/Store";
 
@@ -10,11 +11,16 @@ export class CartComponent {
     numberContainer: HTMLElement;
     packageContainer: HTMLElement;
 
-    store: Store;
+    firstPayElement: HTMLElement;
+    monthlyFeeElement: HTMLElement;
 
-    constructor(parentElement: HTMLElement, store: Store) {
+    store: Store;
+    calculator: CalculationService;
+
+    constructor(parentElement: HTMLElement, store: Store, calculator: CalculationService) {
         this.parentElement = parentElement;
         this.store = store;
+        this.calculator = calculator;
 
         this.removeNumber = this.removeNumber.bind(this);
         this.removePackage = this.removePackage.bind(this);
@@ -48,12 +54,12 @@ export class CartComponent {
     }
 
     renderFistPay() {
-        this.renderPayContainer('Установочная плата',
+        this.firstPayElement = this.renderPayContainer('Установочная плата',
             'Единоразовый платеж при подключении','0.00');
     }
 
     renderMonthlyFee() {
-        this.renderPayContainer('Ежемесячная абонентская плата', 
+        this.monthlyFeeElement = this.renderPayContainer('Ежемесячная абонентская плата', 
             'Ежемесячная плата за использование SIP-телефонии','0.00');
     }
 
@@ -64,7 +70,7 @@ export class CartComponent {
         renderElement(content,'div',['title'],title);
         renderElement(content,'div',['desc'],desc);
 
-        renderElement(container,'div',['value'],value);
+        return renderElement(container,'div',['value'],value);
     }
 
     addNumber(order: NumberOrder) {
@@ -91,11 +97,16 @@ export class CartComponent {
 
         editIcon.src = '../../public/images/edit.svg';
         deleteIcon.src = '../../public/images/delete.svg';
+
+        this.calculator.addNumber(order);
+        this.updatePrices();
     }
 
     removeNumber(e: MouseEvent) {
         const target = e.target as HTMLElement;
         const element = target.closest('.number') as HTMLElement;
+        const index = [].indexOf.call(this.numberContainer.children,element);
+        console.log(index);
         this.numberContainer.removeChild(element);
     }
 
@@ -109,7 +120,6 @@ export class CartComponent {
         renderElement(topContainer,'div',['title'],pack.name);
         renderElement(botContainer,'div',['description'],pack.description);
 
-        //if(pack.isDefault) return;
         renderElement(topContainer,'div',['employees'],`Сотрудников: ${order.employees}`);
 
         const deleteBtn = renderElement(botContainer,'div',['btn']);
@@ -120,6 +130,12 @@ export class CartComponent {
 
     removePackage(e: MouseEvent) {
         this.packageContainer.innerHTML = '';
+    }
+
+    updatePrices() {
+        const cost = this.calculator.getTotalCost();
+        this.firstPayElement.textContent = `${cost.firstPay}`;
+        this.monthlyFeeElement.textContent = `${cost.monthlyFee}`;
     }
 
     togglePackageContainer() {

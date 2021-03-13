@@ -2,6 +2,7 @@ import Navigo from "navigo";
 import { ExternalNumber } from "../Models/ExternalNumber";
 import { PackageOrder } from "../Models/PackageOrder";
 import { PackageSet } from "../Models/PBXPackage";
+import { CalculationService } from "../Services/CalculationService";
 import { getExternalNumbers } from "../Services/ExternalNumbersService";
 import getPBXPackages from "../Services/PBXPackageService";
 import renderElement from "../Utils/renderElement";
@@ -23,6 +24,7 @@ export class App {
     rightContainer: HTMLElement;
 
     cart: CartComponent;
+    calculator: CalculationService;
 
     constructor(parentElement: HTMLElement, store: Store, router: Navigo) {
         this.parentElement = parentElement;
@@ -63,13 +65,17 @@ export class App {
     }
 
     renderCart() {
-        this.cart = new CartComponent(this.rightContainer,this.store);
+        this.calculator = CalculationService.getInstance();
+        this.cart = new CartComponent(this.rightContainer,this.store,this.calculator);
         this.cart.render();
     }
 
     initRoutes() {
         this.router.on('/',() => {});
         this.router.on('/number/:id',this.openExternalNumber);
+        this.router.on('/packages',() => {
+            console.log(JSON.stringify(this.packageSet));
+        })
         this.router.resolve();
     }
 
