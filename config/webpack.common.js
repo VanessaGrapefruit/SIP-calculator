@@ -88,7 +88,8 @@ module.exports = {
                 test: /\.(woff(2)?|eot|ttf|otf)$/,
                 type: 'asset/resource',
                 generator: {
-                    filename: 'assets/fonts/[name][ext]',
+                    filename: '../public/fonts/[name][ext]',
+                    //filename: 'assets/fonts/[name][ext]',
                 },
             },
 

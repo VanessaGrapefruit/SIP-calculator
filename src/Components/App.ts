@@ -1,4 +1,5 @@
 import Navigo from "navigo";
+import { path } from "../Models/Costants";
 import { ExternalNumber } from "../Models/ExternalNumber";
 import { PackageOrder } from "../Models/PackageOrder";
 import { PackageSet } from "../Models/PBXPackage";
@@ -68,7 +69,7 @@ export class App {
         new PBXPackagesComponent(this.packageSet,this.leftContainer,this.store).render();
 
         const logo = renderElement(this.leftContainer,'img',['logo']) as HTMLImageElement;
-        logo.src = '../../public/images/logo.svg';
+        logo.src = `${path.public}/images/logo.svg`;
     }
 
     renderCart() {

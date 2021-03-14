@@ -3,6 +3,7 @@ import { getNumberDescription } from "../Utils/getNumberDescription";
 import renderElement from "../Utils/renderElement";
 import Navigo from 'navigo';
 import Store from "../Utils/Store";
+import { path } from "../Models/Costants";
 
 export class ExternalNumbersComponent {
     private numbers: ExternalNumber[];
@@ -48,7 +49,7 @@ export class ExternalNumbersComponent {
 
     renderNumberImage(element: HTMLElement,number: ExternalNumber) {
         const img = renderElement(element,'img',[]) as HTMLImageElement;
-        img.src = `../../public/images/${number.image}`;
+        img.src = `${path.public}/images/${number.image}`;
     }
 
     renderNumberContent(element: HTMLElement, number: ExternalNumber) {
@@ -62,7 +63,7 @@ export class ExternalNumbersComponent {
     renderDescriptionButton(element: HTMLElement, number: ExternalNumber) {
         const mark = renderElement(element,'div',['description-mark']);
         const img = renderElement(mark,'img',[]) as HTMLImageElement;
-        img.src = '../../public/images/question-mark.svg';
+        img.src = `${path.public}/images/question-mark.svg`;
         mark.addEventListener('mouseenter',this.onDescriptionMouseEnter);
     }
 
