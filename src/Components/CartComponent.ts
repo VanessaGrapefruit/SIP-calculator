@@ -96,7 +96,7 @@ export class CartComponent {
 
         const imageDiv = renderElement(div,'div',['image']);
         const img = renderElement(imageDiv,'img',[]) as HTMLImageElement;
-        img.src = `${path.public}/images/${order.number.image}`;
+        img.src = `${path.root}/${path.public}/images/${order.number.image}`;
 
         const content = renderElement(div,'div',['content']);
         renderElement(content,'div',['name'],`${order.number.name} номер`);
@@ -112,8 +112,8 @@ export class CartComponent {
 
         deleteBtn.addEventListener('click',this.removeNumber);
 
-        editIcon.src = `${path.public}/images/edit.svg`;
-        deleteIcon.src = `${path.public}/images/delete.svg`;
+        editIcon.src = `${path.root}/${path.public}/images/edit.svg`;
+        deleteIcon.src = `${path.root}/${path.public}/images/delete.svg`;
 
         this.calculator.addNumber(order);
         this.updatePrices();
@@ -142,7 +142,7 @@ export class CartComponent {
 
         const deleteBtn = renderElement(botContainer,'div',['btn']);
         const icon = renderElement(deleteBtn,'img',[]) as HTMLImageElement;
-        icon.src = `${path.public}/images/delete.svg`;
+        icon.src = `${path.root}/${path.public}/images/delete.svg`;
         deleteBtn.addEventListener('click',this.removePackage);
 
         this.calculator.setPackage(order);

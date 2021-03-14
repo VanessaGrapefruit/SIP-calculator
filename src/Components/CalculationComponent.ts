@@ -27,7 +27,7 @@ export class CalculationComponent extends PopupComponent {
         const header = renderElement(this.container,'div',['header']);
         renderElement(header,'div',['title'],'Детализация заказа SIP-телефонии');
         const logo = renderElement(header,'img',[]) as HTMLImageElement;
-        logo.src = `${path.public}/images/logo.svg`;
+        logo.src = `${path.root}/${path.public}/images/logo.svg`;
         this.renderDividingLine();
     }
 
