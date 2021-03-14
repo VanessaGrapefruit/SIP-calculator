@@ -1,4 +1,5 @@
 import { Cost, NumberCost, PackageCost } from "../Models/Cost";
+import { path } from "../Models/Costants";
 import { CalculationService } from "../Services/CalculationService";
 import renderElement from "../Utils/renderElement";
 import Store from "../Utils/Store";
@@ -26,7 +27,7 @@ export class CalculationComponent extends PopupComponent {
         const header = renderElement(this.container,'div',['header']);
         renderElement(header,'div',['title'],'Детализация заказа SIP-телефонии');
         const logo = renderElement(header,'img',[]) as HTMLImageElement;
-        logo.src = '../../public/images/logo.svg';
+        logo.src = `${path.public}/images/logo.svg`;
         this.renderDividingLine();
     }
 

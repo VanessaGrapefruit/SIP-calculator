@@ -79,7 +79,8 @@ module.exports = {
                 test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
                 type: 'asset/resource',
                 generator: {
-                    filename: 'assets/images/[name][ext]',
+                    filename: '../public/images/[name][ext]',
+                    //filename: 'assets/images/[name][ext]',
                 },
             },
 
@@ -88,7 +89,8 @@ module.exports = {
                 test: /\.(woff(2)?|eot|ttf|otf)$/,
                 type: 'asset/resource',
                 generator: {
-                    filename: 'assets/fonts/[name][ext]',
+                    filename: '../public/fonts/[name][ext]',
+                    //filename: 'assets/fonts/[name][ext]',
                 },
             },
 

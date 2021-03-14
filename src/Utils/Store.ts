@@ -1,4 +1,5 @@
 import Navigo from "navigo";
+import { path } from "../Models/Costants";
 import { NumberOrder } from "../Models/NumberOrder";
 import { PackageOrder } from "../Models/PackageOrder";
 import EventEmitter from "./EventEmmiter";
@@ -25,12 +26,12 @@ export default class Store {
     }
 
     openExternalNumber(id: string) {
-        this.router.navigate(`number/${id}`);
+        this.router.navigate(`${path.root}/number/${id}`);
     }
 
     hidePopup() {
         this.eventEmmiter.emit(EVENTS.HIDE_POPUP);
-        this.router.navigate('/');
+        this.router.navigate(path.root);
     }
 
     addNumberToCart(order: NumberOrder) {

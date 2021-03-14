@@ -1,4 +1,5 @@
 import Navigo from "navigo";
+import { path } from "../Models/Costants";
 import { ExternalNumber } from "../Models/ExternalNumber";
 import { PackageOrder } from "../Models/PackageOrder";
 import { PackageSet } from "../Models/PBXPackage";
@@ -68,7 +69,7 @@ export class App {
         new PBXPackagesComponent(this.packageSet,this.leftContainer,this.store).render();
 
         const logo = renderElement(this.leftContainer,'img',['logo']) as HTMLImageElement;
-        logo.src = '../../public/images/logo.svg';
+        logo.src = `${path.public}/images/logo.svg`;
     }
 
     renderCart() {
@@ -78,11 +79,8 @@ export class App {
     }
 
     initRoutes() {
-        this.router.on('/',() => {});
-        this.router.on('/number/:id',this.openExternalNumber);
-        this.router.on('/packages',() => {
-            console.log(JSON.stringify(this.packageSet));
-        })
+        this.router.on(`${path.root}/`,() => {});
+        this.router.on(`${path.root}/number/:id`,this.openExternalNumber);
         this.router.resolve();
     }
 

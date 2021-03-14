@@ -1,3 +1,4 @@
+import { path } from "../Models/Costants";
 import { PackageOrder } from "../Models/PackageOrder";
 import { PackageSet, PBXPackage } from "../Models/PBXPackage";
 import renderElement from "../Utils/renderElement";
@@ -61,11 +62,11 @@ export class PackagesTableComponent {
         if (state) {
             mark.classList.add('check');
             const img = renderElement(mark,'img',[]) as HTMLImageElement;
-            img.src = '../../public/images/check-mark.svg';
+            img.src = `${path.public}/images/check-mark.svg`;
         } else {
             mark.classList.add('cross');
             const img = renderElement(mark,'img',[]) as HTMLImageElement;
-            img.src = '../../public/images/cross-mark.svg';
+            img.src = `${path.public}/images/cross-mark.svg`;
         }
     }
 
