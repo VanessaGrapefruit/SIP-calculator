@@ -140,6 +140,30 @@
             line-height: 48px;
         }
     }
+    .btns-container__summary {
+        position: absolute;
+        bottom: 50px;
+        left: 35px;
+        right: 35px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 16px;
+        .btn {
+            font-family: $monserrat-regular;
+            font-size: 16px;
+            line-height: 27px;
+            letter-spacing: 0.03px;
+            color: $color-white;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .send {
+            background-color: rgba($color: $bg-second, $alpha: 0.05);
+        }
+        .summary {
+            background-color: $color-aqua;
+        }
+    }
 }
 
 @media(max-height: 1039px) {
@@ -150,6 +174,7 @@
             font-size: 20px;
         }
         .numbers-container {
+            height: 30vh;
             .number {
                 .container {
                     div.image {
@@ -184,7 +209,7 @@
             }
         }
         .pay-container {
-            margin-top: 30px;
+            margin-top: 20px;
             .content {
                 .title {
                     font-size: 16px;
@@ -195,6 +220,15 @@
             }
             .value {
                 font-size: 16px;
+            }
+        }
+        .btns-container__summary {
+            bottom: 30px;
+            left: 30px;
+            right: 30px;
+            .btn {
+                font-size: 12px;
+                line-height: 16px;
             }
         }
     }

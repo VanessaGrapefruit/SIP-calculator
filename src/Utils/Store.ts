@@ -8,6 +8,8 @@ export enum EVENTS {
     ADD_NUMBER_TO_CART = 'ADD_NUMBER_TO_CART',
     ADD_PACKAGE_TO_CART = 'ADD_PACKAGE_TO_CART',
     PBX_CHECKBOX_TOGGLED = 'PBX_CHECKBOX_TOGGLED',
+    OPEN_SUMMARY_POPUP = 'OPEN_SUMMARY_POPUP',
+    HIDE_POPUP = 'HIDE_POPUP'
 }
 
 export default class Store {
@@ -27,6 +29,7 @@ export default class Store {
     }
 
     hidePopup() {
+        this.eventEmmiter.emit(EVENTS.HIDE_POPUP);
         this.router.navigate('/');
     }
 
@@ -41,7 +44,10 @@ export default class Store {
     }
 
     tooglePBXCheckbox() {
-        console.log('toggle from store');
         this.eventEmmiter.emit(EVENTS.PBX_CHECKBOX_TOGGLED);
+    }
+
+    openSummaryPopup() {
+        this.eventEmmiter.emit(EVENTS.OPEN_SUMMARY_POPUP);
     }
 }

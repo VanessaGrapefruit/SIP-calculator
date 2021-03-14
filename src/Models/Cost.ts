@@ -1,5 +1,5 @@
 import { ExternalNumber } from "./ExternalNumber";
-import { PBXPackage } from "./PBXPackage";
+import { PBXFunction, PBXPackage } from "./PBXPackage";
 
 export interface NumberCost {
     number: ExternalNumber;
@@ -9,6 +9,7 @@ export interface NumberCost {
 
 export interface PackageCost {
     package: PBXPackage;
+    functions: PBXFunction[];
     cost: Cost;
 }
 

@@ -18,12 +18,16 @@ export class CalculationService {
         return this.instance;
     }
 
+    isEmptyOrder() : boolean {
+        return this.numbers.length === 0 && this.package === undefined;
+    }
+
     setPackage(order: PackageOrder) {
         this.package = order;
     }
 
     removePackage() {
-        this.package = null;
+        this.package = undefined;
     }
 
     addNumber(order: NumberOrder) {
@@ -52,6 +56,10 @@ export class CalculationService {
         return {firstPay,monthlyFee};
     }
 
+    getNumbers() {
+        return this.numbers.map((order) => this.getNumberCost(order));
+    }
+
     getNumberCost(order: NumberOrder) : NumberCost {
         const number = order.number;
         const numbersCost: Cost = {
@@ -67,12 +75,14 @@ export class CalculationService {
         return {number,numbersCost,trunksCost};
     }
 
-    getPackageCost() : PackageCost {
+    getPackageCost() : PackageCost | undefined {
+        if (!this.package) return undefined;
+        const functions = this.package.functions;
         const cost: Cost = {
             count: this.package.employees,
             firstPay: this.package.package.firstPay * this.package.employees,
             monthlyFee: this.package.package.monthlyFee * this.package.employees
         }
-        return {package: this.package.package,cost};
+        return {package: this.package.package,cost,functions};
     }
 }

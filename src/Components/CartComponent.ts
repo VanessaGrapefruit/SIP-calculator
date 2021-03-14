@@ -22,6 +22,7 @@ export class CartComponent {
         this.store = store;
         this.calculator = calculator;
 
+        this.openSummaryPopup = this.openSummaryPopup.bind(this);
         this.removeNumber = this.removeNumber.bind(this);
         this.removePackage = this.removePackage.bind(this);
         this.togglePackageContainer = this.togglePackageContainer.bind(this);
@@ -36,6 +37,8 @@ export class CartComponent {
 
         this.renderFistPay();
         this.renderMonthlyFee();
+
+        this.renderButtons();
 
         this.store.eventEmmiter.addEvent(EVENTS.PBX_CHECKBOX_TOGGLED,this.togglePackageContainer);
     }
@@ -73,6 +76,19 @@ export class CartComponent {
         return renderElement(container,'div',['value'],value);
     }
 
+    renderButtons() {
+        const container = renderElement(this.container,'div',['btns-container__summary']);
+
+        const sendBtn = renderElement(container,'div',['btn','send'],'Отправить на E-mail');
+        const summaryBtn = renderElement(container,'div',['btn','summary'],'Показать расчет');
+
+        summaryBtn.addEventListener('click',this.openSummaryPopup);
+    }
+
+    openSummaryPopup() {
+        this.store.openSummaryPopup();
+    }
+
     addNumber(order: NumberOrder) {
         const element = renderElement(this.numberContainer,'div',['number']);
         const div = renderElement(element,'div',['container']);
@@ -106,7 +122,8 @@ export class CartComponent {
         const target = e.target as HTMLElement;
         const element = target.closest('.number') as HTMLElement;
         const index = [].indexOf.call(this.numberContainer.children,element);
-        console.log(index);
+        this.calculator.removeNumber(index);
+        this.updatePrices();
         this.numberContainer.removeChild(element);
     }
 
@@ -126,9 +143,14 @@ export class CartComponent {
         const icon = renderElement(deleteBtn,'img',[]) as HTMLImageElement;
         icon.src = '../../public/images/delete.svg';
         deleteBtn.addEventListener('click',this.removePackage);
+
+        this.calculator.setPackage(order);
+        this.updatePrices();
     }
 
-    removePackage(e: MouseEvent) {
+    removePackage() {
+        this.calculator.removePackage();
+        this.updatePrices();
         this.packageContainer.innerHTML = '';
     }
 
@@ -139,6 +161,7 @@ export class CartComponent {
     }
 
     togglePackageContainer() {
+        this.removePackage();
         this.packageContainer.classList.toggle('disabled');
     }
 }

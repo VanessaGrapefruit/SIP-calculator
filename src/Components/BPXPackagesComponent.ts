@@ -66,9 +66,14 @@ export class PBXPackagesComponent extends PackagesTableComponent {
         super.addPackageToCart(e);
 
         const pack = this.getPackage(e);
+        const functions = this.packagesSet.functions.filter((func) => {
+            const length = pack.functions.filter((func) => func.included).length;
+            return func.id <= length;
+        })
         const order: PackageOrder = {
             package: pack,
-            employees: +this.employeesInput.value
+            employees: +this.employeesInput.value,
+            functions
         }
         this.store.addPackageToCart(order);
     }
