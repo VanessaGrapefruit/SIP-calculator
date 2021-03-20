@@ -59,12 +59,14 @@ export class PBXPackagesComponent extends PackagesTableComponent {
 
         this.employeesInput = renderElement(this.employeesContainer,'input',[]) as HTMLInputElement;
         this.employeesInput.value = '4';
+        this.employeesInput.min = '1';
         this.employeesInput.type = 'number';
     }
 
     addPackageToCart(e: MouseEvent) {
         super.addPackageToCart(e);
-
+        this.validateInput();
+        
         const pack = this.getPackage(e);
         const functions = this.packagesSet.functions.filter((func) => {
             const length = pack.functions.filter((func) => func.included).length;
@@ -76,6 +78,11 @@ export class PBXPackagesComponent extends PackagesTableComponent {
             functions
         }
         this.store.addPackageToCart(order);
+    }
+
+    validateInput() {
+        const value = +this.employeesInput.value;
+        if (value < 1) this.employeesInput.value = '1';
     }
 
     disable() {

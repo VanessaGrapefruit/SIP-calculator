@@ -6,6 +6,7 @@ export function getExternalNumbers() {
 
 const numbers : ExternalNumber[] = [
     {
+        id: 1,
         name: 'Золотой',
         level: 1,
         description: 'Одинаковые 4 цифры, или 3 последние цифры равны нулю, или цифры зеркальны.',
@@ -17,6 +18,7 @@ const numbers : ExternalNumber[] = [
         trunkMonthlyFee: 7,
     },
     {
+        id: 2,
         name: 'Серебрянный',
         level: 2,
         description: 'Одинаковые 4 цифры, или 3 последние цифры равны нулю, или цифры зеркальны.',
@@ -28,6 +30,7 @@ const numbers : ExternalNumber[] = [
         trunkMonthlyFee: 7,
     },
     {
+        id: 3,
         name: 'Бронзовый',
         level: 3,
         description: 'Одинаковые 4 цифры, или 3 последние цифры равны нулю, или цифры зеркальны.',
@@ -39,6 +42,7 @@ const numbers : ExternalNumber[] = [
         trunkMonthlyFee: 7,
     },
     {
+        id: 4,
         name: 'Случайный',
         level: 4,
         description: 'Одинаковые 4 цифры, или 3 последние цифры равны нулю, или цифры зеркальны.',

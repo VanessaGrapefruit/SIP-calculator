@@ -22,6 +22,7 @@ export class NumberPopupComponent extends PopupComponent {
 
         this.number = number;
         this.addToCart = this.addToCart.bind(this);
+        this.validateInput = this.validateInput.bind(this);
     }
 
     render() {
@@ -73,7 +74,7 @@ export class NumberPopupComponent extends PopupComponent {
         const cost = renderElement(content,'div',['cost']);
         if (options === NumberCostOptions.number) {
             renderElement(cost,'div',[],`Установочная плата: ${this.number.numberFirstPay} BYN`);
-            renderElement(cost,'div',[],`Абонентская плата: ${this.number.trunkMonthlyFee} BYN`);
+            renderElement(cost,'div',[],`Абонентская плата: ${this.number.numberMonthlyFee} BYN`);
         } else {
             renderElement(cost,'div',[],`Установочная плата: ${this.number.trunkFirstPay} BYN`);
             renderElement(cost,'div',[],`Абонентская плата: ${this.number.trunkMonthlyFee} BYN`);
@@ -85,6 +86,7 @@ export class NumberPopupComponent extends PopupComponent {
     renderInput(parent: HTMLElement,value: number) {
         const input = renderElement(parent,'input',[]) as HTMLInputElement;
         input.type = 'number';
+        input.min = '1';
         input.value = value.toString();
         return input;
     }
@@ -104,6 +106,9 @@ export class NumberPopupComponent extends PopupComponent {
     }
 
     addToCart() {
+        this.validateInput(this.numbersInput);
+        this.validateInput(this.trunksInput);
+
         const order : NumberOrder = {
             number: this.number,
             numsCount: +this.numbersInput.value,
@@ -111,5 +116,10 @@ export class NumberPopupComponent extends PopupComponent {
         }
         this.store.addNumberToCart(order);
         this.dispose();
+    }
+
+    validateInput(input: HTMLInputElement) {
+        const value = +input.value;
+        if (value < 1) input.value = '1';
     }
 }

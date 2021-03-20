@@ -34,6 +34,16 @@ export class CalculationService {
         this.numbers.push(order);
     }
 
+    validateNumberAndChange(order: NumberOrder) : boolean {
+        const orderIndex = this.numbers.findIndex((or) => or.number.name === order.number.name);
+        if (orderIndex === -1) return true;
+        
+        const number = this.numbers[orderIndex];
+        number.numsCount = order.numsCount;
+        number.trunksCount = order.trunksCount;
+        return false;
+    }
+
     removeNumber(index: number) {
         if (index < 0 || index >= this.numbers.length) {
             throw new Error('Index must me greather than -1 and less than numbers length');

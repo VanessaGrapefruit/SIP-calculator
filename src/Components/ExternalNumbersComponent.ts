@@ -25,14 +25,14 @@ export class ExternalNumbersComponent {
     render() {
         this.overlay = renderElement(this.parentElement,'div',['external-numbers__overlay']);
         this.container = renderElement(this.overlay,'div',['external-numbers__container']);
-        this.numbers.forEach((number,id) => {
-            this.renderNumber(number,id);
+        this.numbers.forEach((number) => {
+            this.renderNumber(number);
         });
     }
 
-    renderNumber(number: ExternalNumber,id: number) {
+    renderNumber(number: ExternalNumber) {
         const element = renderElement(this.container,'div',['external-number']);
-        element.dataset.id = id.toString();
+        element.dataset.id = number.id.toString();
         element.addEventListener('click',this.openPopup);
 
         this.renderNumberImage(element,number);

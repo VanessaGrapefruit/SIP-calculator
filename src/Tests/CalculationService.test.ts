@@ -80,4 +80,21 @@ describe('Calculation service tests', function() {
         assert.equal(cost.firstPay,204);
         assert.equal(cost.monthlyFee,84);
     })
+
+    it('should change numbers collection if number is included', function() {
+        const orderToChange: NumberOrder = {
+            number: numbers[1],
+            numsCount: 2,
+            trunksCount: 10
+        }
+        calculator.addNumber(orderToChange);
+        const cost = calculator.getTotalCost();
+
+        orderToChange.numsCount -=1;
+        assert.equal(calculator.validateNumberAndChange(orderToChange),false);
+
+        const costChanged = calculator.getTotalCost();
+        assert.equal(costChanged.firstPay,cost.firstPay - orderToChange.number.numberFirstPay);
+        assert.equal(costChanged.monthlyFee,cost.monthlyFee - orderToChange.number.numberMonthlyFee);
+    })
 });

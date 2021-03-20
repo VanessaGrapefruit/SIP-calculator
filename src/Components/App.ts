@@ -87,7 +87,7 @@ export class App {
     openExternalNumber() {
         setTimeout(() => {
             const id = +window.location.pathname.split('/').pop();
-            const number = this.numbers[id];
+            const number = this.numbers.find((num) => num.id === id);
             this.popup = new NumberPopupComponent(number, this.leftContainer, this.store);
             this.popup.render();
         },0);

@@ -24,6 +24,7 @@ export class CartComponent {
         this.calculator = calculator;
 
         this.openSummaryPopup = this.openSummaryPopup.bind(this);
+        this.editNumber = this.editNumber.bind(this);
         this.removeNumber = this.removeNumber.bind(this);
         this.removePackage = this.removePackage.bind(this);
         this.togglePackageContainer = this.togglePackageContainer.bind(this);
@@ -91,7 +92,21 @@ export class CartComponent {
     }
 
     addNumber(order: NumberOrder) {
+        if (this.calculator.validateNumberAndChange(order)) {
+            this.renderNumber(order);
+            this.calculator.addNumber(order);
+            this.updatePrices();
+        } else {
+            const number = this.numberContainer.querySelector(`[data-id="${order.number.id}"]`);
+            (number.querySelector('.nums-count') as HTMLElement).textContent = `Количество номеров: ${order.numsCount}`;
+            (number.querySelector('.trunks-count') as HTMLElement).textContent = `Количество линий: ${order.trunksCount}`;
+            this.updatePrices();
+        }
+    }
+
+    renderNumber(order: NumberOrder) {
         const element = renderElement(this.numberContainer,'div',['number']);
+        element.dataset.id = order.number.id.toString();
         const div = renderElement(element,'div',['container']);
 
         const imageDiv = renderElement(div,'div',['image']);
@@ -100,8 +115,8 @@ export class CartComponent {
 
         const content = renderElement(div,'div',['content']);
         renderElement(content,'div',['name'],`${order.number.name} номер`);
-        renderElement(content,'div',['count'],`Количество номеров: ${order.numsCount}`);
-        renderElement(content,'div',['count'],`Количество линий: ${order.trunksCount}`);
+        renderElement(content,'div',['count','nums-count'],`Количество номеров: ${order.numsCount}`);
+        renderElement(content,'div',['count','trunks-count'],`Количество линий: ${order.trunksCount}`);
 
         const buttons = renderElement(element,'div',['btns-container']);
         const editBtn = renderElement(buttons,'div',['btn']);
@@ -110,13 +125,18 @@ export class CartComponent {
         const editIcon = renderElement(editBtn,'img',['icon']) as HTMLImageElement;
         const deleteIcon = renderElement(deleteBtn,'img',['icon']) as HTMLImageElement;
 
+        editBtn.addEventListener('click',this.editNumber);
         deleteBtn.addEventListener('click',this.removeNumber);
 
         editIcon.src = `${path.root}/${path.public}/images/edit.svg`;
         deleteIcon.src = `${path.root}/${path.public}/images/delete.svg`;
+    }
 
-        this.calculator.addNumber(order);
-        this.updatePrices();
+    editNumber(e: MouseEvent) {
+        const target = e.target as HTMLElement;
+        const element = target.closest('.number') as HTMLElement;
+        const id = element.dataset.id;
+        this.store.openExternalNumber(id);
     }
 
     removeNumber(e: MouseEvent) {
