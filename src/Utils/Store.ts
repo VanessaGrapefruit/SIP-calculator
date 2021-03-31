@@ -10,6 +10,7 @@ export enum EVENTS {
     ADD_PACKAGE_TO_CART = 'ADD_PACKAGE_TO_CART',
     PBX_CHECKBOX_TOGGLED = 'PBX_CHECKBOX_TOGGLED',
     OPEN_SUMMARY_POPUP = 'OPEN_SUMMARY_POPUP',
+    DOWNLOAD_SUMMARY = 'DOWNLOAD_SUMMARY',
     HIDE_POPUP = 'HIDE_POPUP'
 }
 
@@ -17,6 +18,7 @@ export default class Store {
     eventEmmiter: EventEmitter;
     router: Navigo;
 
+    externalNumberId: number;
     numberOrder: NumberOrder;
     packageOrder: PackageOrder;
 
@@ -26,7 +28,9 @@ export default class Store {
     }
 
     openExternalNumber(id: string) {
-        this.router.navigate(`${path.root}/number/${id}`);
+        this.externalNumberId = +id;
+        this.eventEmmiter.emit(EVENTS.OPEN_EXTERNAL_NUMBER);
+        //this.router.navigate(`${path.root}/number/${id}`);
     }
 
     hidePopup() {
@@ -50,5 +54,10 @@ export default class Store {
 
     openSummaryPopup() {
         this.eventEmmiter.emit(EVENTS.OPEN_SUMMARY_POPUP);
+    }
+
+    printSummary() {
+        this.openSummaryPopup();
+        this.eventEmmiter.emit(EVENTS.DOWNLOAD_SUMMARY);
     }
 }

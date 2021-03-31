@@ -205,3 +205,12 @@
         }
     }
 }
+
+@media print {
+    .package-header {
+        display: none;
+    }
+    .package-container__overlay {
+        display: none;
+    }
+}

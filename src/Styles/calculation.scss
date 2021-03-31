@@ -131,3 +131,21 @@
             }
         }
     }
+    
+    @media print {
+        .calculation-popup {
+            overflow-y: visible;
+            max-height: none;
+            .btns-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                .btns {
+                    .btn {
+                        background-color: rgba($color: #8E8E8E, $alpha: 0.1);
+                        color: $font-first;
+                    }
+                }
+            }
+        }
+    }

@@ -16,3 +16,12 @@ $right-container-width: 28%;
     background-color: rgba($color: $bg-side, $alpha: 0.7);
     z-index: 90;
 }
+
+@media print {
+    .popup-container {
+        position: absolute;
+        left: 0;
+        top: 0;
+        transform: none;
+    }
+}

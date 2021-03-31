@@ -1,4 +1,5 @@
-import Navigo from "navigo";
+import jsPDF, { HTMLWorker } from "jspdf";
+import Navigo, { Match } from "navigo";
 import { path } from "../Models/Costants";
 import { ExternalNumber } from "../Models/ExternalNumber";
 import { PackageOrder } from "../Models/PackageOrder";
@@ -39,6 +40,7 @@ export class App {
         this.openSummaryPopup = this.openSummaryPopup.bind(this);
         this.addNumberToCart = this.addNumberToCart.bind(this);
         this.addPackageToCart = this.addPackageToCart.bind(this);
+        this.downloadSummary = this.downloadSummary.bind(this);
         this.hidePopup = this.hidePopup.bind(this);
     }
 
@@ -50,11 +52,13 @@ export class App {
         this.renderOffers();
         this.renderCart();
 
-        this.initRoutes();
+        //this.initRoutes();
 
+        this.store.eventEmmiter.addEvent(EVENTS.OPEN_EXTERNAL_NUMBER,this.openExternalNumber);
         this.store.eventEmmiter.addEvent(EVENTS.ADD_NUMBER_TO_CART,this.addNumberToCart);
         this.store.eventEmmiter.addEvent(EVENTS.ADD_PACKAGE_TO_CART,this.addPackageToCart);
         this.store.eventEmmiter.addEvent(EVENTS.OPEN_SUMMARY_POPUP,this.openSummaryPopup);
+        this.store.eventEmmiter.addEvent(EVENTS.DOWNLOAD_SUMMARY,this.downloadSummary);
         this.store.eventEmmiter.addEvent(EVENTS.HIDE_POPUP,this.hidePopup);
     }
 
@@ -86,7 +90,7 @@ export class App {
 
     openExternalNumber() {
         setTimeout(() => {
-            const id = +window.location.href.split('/').pop();
+            const id = this.store.externalNumberId;
             const number = this.numbers.find((num) => num.id === id);
             this.popup = new NumberPopupComponent(number, this.leftContainer, this.store);
             this.popup.render();
@@ -109,6 +113,11 @@ export class App {
 
         this.popup = new CalculationComponent(this.leftContainer,this.store,this.calculator);
         this.popup.render();
+    }
+
+    async downloadSummary() {
+        if (!(this.popup instanceof CalculationComponent)) return;
+        window.print();
     }
 
     hidePopup() {

@@ -1,5 +1,4 @@
 import { path } from "../Models/Costants";
-import { ExternalNumber } from "../Models/ExternalNumber";
 import { NumberOrder } from "../Models/NumberOrder";
 import { PackageOrder } from "../Models/PackageOrder";
 import { CalculationService } from "../Services/CalculationService";
@@ -24,6 +23,7 @@ export class CartComponent {
         this.calculator = calculator;
 
         this.openSummaryPopup = this.openSummaryPopup.bind(this);
+        this.printSummary = this.printSummary.bind(this);
         this.editNumber = this.editNumber.bind(this);
         this.removeNumber = this.removeNumber.bind(this);
         this.removePackage = this.removePackage.bind(this);
@@ -81,14 +81,19 @@ export class CartComponent {
     renderButtons() {
         const container = renderElement(this.container,'div',['btns-container__summary']);
 
-        const sendBtn = renderElement(container,'div',['btn','send'],'Отправить на E-mail');
+        const sendBtn = renderElement(container,'div',['btn','send'],'Скачать PDF');
         const summaryBtn = renderElement(container,'div',['btn','summary'],'Показать расчет');
 
+        sendBtn.addEventListener('click',this.printSummary);
         summaryBtn.addEventListener('click',this.openSummaryPopup);
     }
 
     openSummaryPopup() {
         this.store.openSummaryPopup();
+    }
+
+    printSummary() {
+        this.store.printSummary();
     }
 
     addNumber(order: NumberOrder) {

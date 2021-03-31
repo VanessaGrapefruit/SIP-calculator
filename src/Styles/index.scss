@@ -71,3 +71,18 @@ body {
         }
     }
 }
+
+@media print {
+    .left-container {
+        width: 100%;
+        .header-title {
+            display: none;
+        }
+        .numbers-subtitle {
+            display: none;
+        }
+    }
+    .right-container {
+        display: none;
+    }
+}

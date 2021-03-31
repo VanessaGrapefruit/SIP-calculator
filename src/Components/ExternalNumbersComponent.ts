@@ -90,6 +90,6 @@ export class ExternalNumbersComponent {
 
     getExternalNumber(element: HTMLElement) {
         const id = +element.dataset.id;
-        return this.numbers[id];
+        return this.numbers.find((number) => number.id === id);
     }
 }

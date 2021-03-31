@@ -25,7 +25,7 @@ export class PackagesTableComponent {
     }
 
     render() {
-        this.wrapper = renderElement(this.parentElement,'div',[]);
+        this.wrapper = renderElement(this.parentElement,'div',['package-container__overlay']);
         this.grid = renderElement(this.wrapper,'div',['package-container__table']);
         this.grid.style.gridTemplateColumns = 
             `auto repeat(${this.packagesSet.packages.length},1fr)`;
