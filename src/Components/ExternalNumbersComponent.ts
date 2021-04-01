@@ -1,7 +1,6 @@
 import { ExternalNumber } from "../Models/ExternalNumber";
 import { getNumberDescription } from "../Utils/getNumberDescription";
 import renderElement from "../Utils/renderElement";
-import Navigo from 'navigo';
 import Store from "../Utils/Store";
 import { path } from "../Models/Costants";
 

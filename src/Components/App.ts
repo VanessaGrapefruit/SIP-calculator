@@ -1,12 +1,10 @@
-import jsPDF, { HTMLWorker } from "jspdf";
-import Navigo, { Match } from "navigo";
+import Navigo from "navigo";
 import { path } from "../Models/Costants";
 import { ExternalNumber } from "../Models/ExternalNumber";
-import { PackageOrder } from "../Models/PackageOrder";
 import { PackageSet } from "../Models/PBXPackage";
 import { CalculationService } from "../Services/CalculationService";
-import { getExternalNumbers } from "../Services/ExternalNumbersService";
-import getPBXPackages from "../Services/PBXPackageService";
+import { ExternalNumbersService } from "../Services/ExternalNumbersService";
+import { PBXPackageService } from "../Services/PBXPackageService";
 import renderElement from "../Utils/renderElement";
 import Store, { EVENTS } from "../Utils/Store";
 import { PBXPackagesComponent } from "./BPXPackagesComponent";
@@ -14,7 +12,6 @@ import { CalculationComponent } from "./CalculationComponent";
 import { CartComponent } from "./CartComponent";
 import { ExternalNumbersComponent } from "./ExternalNumbersComponent";
 import { NumberPopupComponent } from "./NumbersPopupComponent";
-import { PackagesTableComponent } from "./PackagesTableComponent";
 import { PopupComponent } from "./PopupComponent";
 
 export class App {
@@ -62,14 +59,15 @@ export class App {
         this.store.eventEmmiter.addEvent(EVENTS.HIDE_POPUP,this.hidePopup);
     }
 
-    renderOffers() {
+    async renderOffers() {
         renderElement(this.leftContainer,'div',['header-title'],'SIP-Калькулятор');
         renderElement(this.leftContainer,'div',['numbers-subtitle'],'Внешние номера');
 
-        this.numbers = getExternalNumbers();
+        this.numbers = await ExternalNumbersService.getInstance().getExternalNumbers();
         new ExternalNumbersComponent(this.numbers,this.leftContainer,this.store).render();
       
-        this.packageSet = getPBXPackages();
+        this.packageSet = await PBXPackageService.getInstance().getPBXPackages();
+        console.log(this.packageSet);
         new PBXPackagesComponent(this.packageSet,this.leftContainer,this.store).render();
 
         const logo = renderElement(this.leftContainer,'img',['logo']) as HTMLImageElement;

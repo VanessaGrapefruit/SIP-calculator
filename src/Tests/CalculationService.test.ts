@@ -1,14 +1,14 @@
 import { NumberOrder } from "../Models/NumberOrder";
 import { CalculationService } from "../Services/CalculationService";
-import { getExternalNumbers } from "../Services/ExternalNumbersService";
-import getPBXPackages from "../Services/PBXPackageService";
+import { ExternalNumbersService } from "../Services/ExternalNumbersService";
+import { PBXPackageService } from "../Services/PBXPackageService";
 import * as assert from 'assert';
 import { PackageOrder } from "../Models/PackageOrder";
 
-describe('Calculation service tests', function() {
+describe('Calculation service tests', async function() {
     const calculator = CalculationService.getInstance();
-    const numbers = getExternalNumbers();
-    const packageSet = getPBXPackages();
+    const numbers =  await ExternalNumbersService.getInstance().getExternalNumbers();
+    const packageSet = await PBXPackageService.getInstance().getPBXPackages();
 
     const order: NumberOrder = {
         number: numbers[0],
