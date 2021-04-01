@@ -24,6 +24,7 @@ export class PBXPackageService {
                 "access_token": "lzdjkhnglkzdjhrzjklg3249857rsigrsldu4tgh3wlo57rlkj_wsioeu762"
             }
         });
+        if (!responce.ok) throw new Error('failed to load packages from API');
         this.packageSet = await responce.json();
     }
 }

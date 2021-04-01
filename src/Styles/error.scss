@@ -1,0 +1,38 @@
+    .error-container {
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        padding: 50px;
+        border: 2px solid black;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .description {
+            max-width: 90%;
+            font-family: $monserrat-semibold;
+            font-size: 24px;
+            letter-spacing: 0.03px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .error {
+            font-family: $open-sans-light;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .reload-btn {
+            border-radius: 6px;
+            background-color: $color-aqua;
+            font-family: $open-sans-semibold;
+            font-size: 16px;
+            color: $color-white;
+            letter-spacing: 0.02px;
+            padding: 15px 35px;
+            margin-bottom: 20px;
+            &:hover {
+                cursor: pointer;
+                box-shadow: 0px 3px 20px #00000029;
+            }
+        }
+    }

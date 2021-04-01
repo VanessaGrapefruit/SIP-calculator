@@ -10,6 +10,7 @@ import Store, { EVENTS } from "../Utils/Store";
 import { PBXPackagesComponent } from "./BPXPackagesComponent";
 import { CalculationComponent } from "./CalculationComponent";
 import { CartComponent } from "./CartComponent";
+import { ErrorComponent } from "./ErrorComponent";
 import { ExternalNumbersComponent } from "./ExternalNumbersComponent";
 import { NumberPopupComponent } from "./NumbersPopupComponent";
 import { PopupComponent } from "./PopupComponent";
@@ -63,15 +64,29 @@ export class App {
         renderElement(this.leftContainer,'div',['header-title'],'SIP-Калькулятор');
         renderElement(this.leftContainer,'div',['numbers-subtitle'],'Внешние номера');
 
-        this.numbers = await ExternalNumbersService.getInstance().getExternalNumbers();
-        new ExternalNumbersComponent(this.numbers,this.leftContainer,this.store).render();
-      
-        this.packageSet = await PBXPackageService.getInstance().getPBXPackages();
-        console.log(this.packageSet);
-        new PBXPackagesComponent(this.packageSet,this.leftContainer,this.store).render();
+        await this.renderExternalNumbers();
+        await this.renderPBXPackages();
 
         const logo = renderElement(this.leftContainer,'img',['logo']) as HTMLImageElement;
         logo.src = `${path.public}/images/logo.svg`;
+    }
+
+    async renderExternalNumbers() {
+        try {
+            this.numbers = await ExternalNumbersService.getInstance().getExternalNumbers();
+            new ExternalNumbersComponent(this.numbers,this.leftContainer,this.store).render();
+        } catch (err) {
+            new ErrorComponent(err).render();
+        }
+    }
+
+    async renderPBXPackages() {
+        try {
+            this.packageSet = await PBXPackageService.getInstance().getPBXPackages();
+            new PBXPackagesComponent(this.packageSet,this.leftContainer,this.store).render();
+        } catch (err) {
+            new ErrorComponent(err).render();
+        }
     }
 
     renderCart() {

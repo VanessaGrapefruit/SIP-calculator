@@ -25,6 +25,7 @@ export class ExternalNumbersService {
                 "access_token": "lzdjkhnglkzdjhrzjklg3249857rsigrsldu4tgh3wlo57rlkj_wsioeu762"
             }
         });
+        if (!responce.ok) throw Error('failed to load external numbers from API');
         this.numbers = await responce.json();
     }
 
