@@ -61,7 +61,7 @@ export class ExternalNumbersComponent {
 
     renderDescriptionButton(element: HTMLElement, number: ExternalNumber) {
         const mark = renderElement(element,'div',['description-mark']);
-        const img = renderElement(mark,'img',[]) as HTMLImageElement;
+        const img = renderElement(mark,'img',['mark']) as HTMLImageElement;
         img.src = `${path.public}/images/question-mark.svg`;
         mark.addEventListener('mouseenter',this.onDescriptionMouseEnter);
     }

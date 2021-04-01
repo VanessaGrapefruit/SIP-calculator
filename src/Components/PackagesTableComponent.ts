@@ -1,6 +1,6 @@
 import { path } from "../Models/Costants";
 import { PackageOrder } from "../Models/PackageOrder";
-import { PackageSet, PBXPackage } from "../Models/PBXPackage";
+import { PackageSet, PBXFunction, PBXPackage } from "../Models/PBXPackage";
 import renderElement from "../Utils/renderElement";
 import Store, { EVENTS } from "../Utils/Store";
 
@@ -22,6 +22,7 @@ export class PackagesTableComponent {
 
         this.addPackageToCart = this.addPackageToCart.bind(this);
         this.toggleInteraction = this.toggleInteraction.bind(this);
+        this.onDescriptionMouseEnter = this.onDescriptionMouseEnter.bind(this);
     }
 
     render() {
@@ -48,13 +49,41 @@ export class PackagesTableComponent {
 
     renderRow(index: number) {
         const func = this.packagesSet.functions[index];
-        renderElement(this.grid,'div',['func'],func.name);
+        this.renderFunction(func);
 
         for (const pack of this.packagesSet.packages) {
             const state = pack.functions[index].included;
             const element = renderElement(this.grid,'div',['package']);
             this.renderStateMark(element,state);
         }
+    }
+
+    renderFunction(func: PBXFunction) {
+        const container = renderElement(this.grid,'div',['func']);
+        container.dataset.id = func.id.toString();
+        renderElement(container,'div',['name'],func.name);
+
+        const mark = renderElement(container,'div',['description-mark']);
+        const img = renderElement(mark,'img',['mark']) as HTMLImageElement;
+        img.src = `${path.public}/images/question-mark.svg`;
+        mark.addEventListener('mouseenter',this.onDescriptionMouseEnter);
+    }
+
+    onDescriptionMouseEnter(e: MouseEvent) {
+        const target = e.target as HTMLElement;
+        const element = target.closest('.func') as HTMLElement;
+        const id = +element.dataset.id;
+        const func = this.packagesSet.functions.find(func => func.id === id);
+
+        const description = renderElement(this.wrapper,'div',['description'],func.description);
+        description.style.left = `${target.offsetLeft}px`;
+        description.style.top = `${target.offsetTop + target.offsetHeight}px`;
+
+        const onmouseleave = () => {
+            this.wrapper.removeChild(description);
+            target.removeEventListener('mouseleave',onmouseleave);
+        }
+        target.addEventListener('mouseleave',onmouseleave);
     }
 
     renderStateMark(element: HTMLElement,state: boolean) {

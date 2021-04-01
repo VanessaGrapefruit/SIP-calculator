@@ -65,12 +65,33 @@
         border-radius: 10px;
         padding: 30px 0 30px 30px;
         .func {
-            font-family: $open-sans-regular;
-            font-size: 14px;
-            line-height: 38px;
-            letter-spacing: 0.03px;
-            color: $font-first;
-            margin-right: 30px;
+            display: flex;
+            justify-content: space-between;
+            .name {
+                font-family: $open-sans-regular;
+                font-size: 14px;
+                line-height: 38px;
+                letter-spacing: 0.03px;
+                color: $font-first;
+                margin-right: 30px;
+            }
+            .description-mark {
+                width: 32px;
+                height: 32px;
+                background-color: $bg-second;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-right: 5px;
+                img.mark {
+                    width: 8px;
+                    height: 8px;
+                }
+                &:hover {
+                    cursor: pointer;
+                }
+            }
         }
         .package {
             display: flex;
@@ -143,6 +164,23 @@
     }
 }
 
+.package-container__overlay {
+    .description {
+        position: absolute;
+        z-index: 15;
+        top: -36px;
+        background-color: $color-white;
+        border-radius: 10px;
+        box-shadow: 0px 3px 20px #00000029;
+        padding: 20px;
+        max-width: 400px;
+        letter-spacing: 0.03px;
+        color: $font-first;
+        font-family: $open-sans-regular;
+        font-size: 14px;
+    }
+}
+
 @media (max-width: 1720px) {
     .package-header {
         .title {
@@ -170,8 +208,10 @@
     }
     .package-container__table {
         .func {
-            font-size: 13px;
-            letter-spacing: 0.02px;
+            .name {
+                font-size: 13px;
+                letter-spacing: 0.02px;
+            }
         }
         .package {
             .check,
