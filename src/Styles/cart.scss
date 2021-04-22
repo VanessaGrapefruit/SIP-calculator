@@ -1,0 +1,319 @@
+.cart-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    margin: 50px 35px;
+    line-height: 27px;
+    .header {
+        font-family: $monserrat-regular;
+        color: $color-white;
+        font-size: 21px;
+        letter-spacing: 0.04px;
+        margin-bottom: 50px;
+    }
+    .numbers-container {
+        background-color: rgba($color: $bg-second, $alpha: 0.01);
+        border-radius: 10px;
+        height: 37vh;
+        margin-bottom: 20px;
+        overflow-y: scroll;
+        &:empty {
+            background-color: rgba($color: $bg-second, $alpha: 0.05);
+        }
+        &::-webkit-scrollbar {
+            width: 0;
+        }
+        .number {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-left: 10px;
+            margin-bottom: 5px;
+            background-color: rgba($color: $bg-second, $alpha: 0.04);
+            border-radius: 10px;
+            .container {
+                display: flex;
+                align-items: center;
+                div.image {
+                    padding: 15px;
+                    margin-right: 20px;
+                    img {
+                        width: 71px;
+                        height: 66px;
+                    }
+                }
+                .content {
+                    color: $color-white;
+                    .name {
+                        font-family: $open-sans-semibold;
+                        font-size: 18px;
+                    }
+                    .count {
+                        font-family: $open-sans-regular;
+                        font-size: 12px;
+                        line-height: 21px;
+                        letter-spacing: 0.02px;
+                        opacity: 0.7;
+                    }
+                }
+            }
+            .btns-container {}
+        }
+    }
+    .package-container.disabled {
+        display: none;
+    }
+    .package-container {
+        background-color: rgba($color: $bg-second, $alpha: 0.05);
+        border-radius: 10px;
+        padding: 30px;
+        min-height: 8vh;
+        color: $color-white;
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            &:nth-child(2) {
+                margin-top: 10px;
+            }
+            .title {
+                font-family: $monserrat-semibold;
+                letter-spacing: 0.04px;
+                font-size: 18px;
+            }
+            .employees {
+                font-family: $monserrat-regular;
+                font-size: 14px;
+                line-height: 24px;
+                letter-spacing: 0.28px;
+                opacity: 0.7;
+            }
+            .description {
+                font-family: $monserrat-regular;
+                font-size: 14px;
+                line-height: 24px;
+                opacity: 0.3;
+                letter-spacing: 0.28px;
+            }
+            .btn {
+                margin: 0 -30px -30px 0;
+            }
+        }
+    }
+    .btn {
+        background-color: rgba($color: $bg-second, $alpha: 0.01);
+        padding: 20px;
+        &:hover {
+            cursor: pointer;
+            background-color: rgba($color: $bg-second, $alpha: 0.02);
+        }
+        img {
+            width: 20px;
+            height: 20px;
+        }
+    }
+    .pay-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 40px;
+        color: $color-white;
+        .content {
+            .title {
+                font-family: $monserrat-regular;
+                font-size: 21px;
+                letter-spacing: 0.04px;
+            }
+            .desc {
+                font-family: $open-sans-light;
+                font-size: 14px;
+                opacity: 0.5;
+                letter-spacing: 0.03px;
+            }
+        }
+        .value {
+            font-family: $monserrat-regular;
+            letter-spacing: 0.04px;
+            opacity: 0.3;
+            font-size: 21px;
+            line-height: 48px;
+        }
+    }
+    .btns-container__summary {
+        position: absolute;
+        bottom: 50px;
+        left: 35px;
+        right: 35px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 16px;
+        .btn {
+            font-family: $monserrat-regular;
+            font-size: 16px;
+            line-height: 27px;
+            letter-spacing: 0.03px;
+            color: $color-white;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .send {
+            background-color: rgba($color: $bg-second, $alpha: 0.05);
+        }
+        .summary {
+            background-color: $color-aqua;
+        }
+    }
+}
+
+@media screen and (max-height: 1039px) {
+    .cart-container {
+        margin: 30px;
+        .header {
+            margin-bottom: 30px;
+            font-size: 20px;
+        }
+        .numbers-container {
+            height: 30vh;
+            .number {
+                .container {
+                    div.image {
+                        padding: 5px;
+                        margin-right: 10px;
+                    }
+                }
+                .btns-container {
+                    .btn {
+                        padding: 15px;
+                    }
+                }
+            }
+        }
+        .package-container {
+            padding: 20px;
+            .container {
+                .title {
+                    font-size: 16px;
+                }
+                .employees {
+                    font-size: 11px;
+                }
+                .description {
+                    font-size: 12px;
+                    line-height: 21px;
+                }
+                .btn {
+                    padding: 15px;
+                    margin: 0 -20px -20px 0;
+                }
+            }
+        }
+        .pay-container {
+            margin-top: 20px;
+            .content {
+                .title {
+                    font-size: 16px;
+                }
+                .desc {
+                    font-size: 12px;
+                }
+            }
+            .value {
+                font-size: 16px;
+            }
+        }
+        .btns-container__summary {
+            bottom: 30px;
+            left: 30px;
+            right: 30px;
+            .btn {
+                font-size: 12px;
+                line-height: 16px;
+            }
+        }
+    }
+}
+
+@media screen and (max-height: 800px) {
+    .cart-container {
+        margin: 20px;
+        .header {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        .numbers-container {
+            height: 30vh;
+            .number {
+                .container {
+                    div.image {
+                        padding: 5px;
+                        margin-right: 10px;
+                        img {
+                            width: 61px;
+                            height: 56px;
+                        }
+                    }
+                    .content {
+                        .name {
+                            font-size: 15px;
+                        }
+                        .count {
+                            font-size: 11px;
+                        }
+                    }
+                }
+                .btns-container {
+                    .btn {
+                        padding: 15px;
+                    }
+                }
+            }
+        }
+        .package-container {
+            padding: 15px;
+            .container {
+                &:nth-child(2) {
+                    margin-top: 0;
+                }
+                .title {
+                    font-size: 14px;
+                }
+                .employees {
+                    font-size: 10px;
+                }
+                .description {
+                    font-size: 11px;
+                    line-height: 18px;
+                }
+                .btn {
+                    padding: 15px;
+                    margin: 0 -15px -15px 0;
+                }
+            }
+        }
+        .pay-container {
+            margin-top: 15px;
+            .content {
+                .title {
+                    font-size: 14px;
+                }
+                .desc {
+                    font-size: 10px;
+                }
+            }
+            .value {
+                font-size: 16px;
+            }
+        }
+        .btns-container__summary {
+            bottom: 15px;
+            left: 30px;
+            right: 30px;
+            .btn {
+                font-size: 10px;
+                line-height: 16px;
+                padding: 15px;
+            }
+        }
+    }
+}

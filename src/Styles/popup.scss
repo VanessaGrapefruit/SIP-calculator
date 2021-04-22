@@ -1,0 +1,27 @@
+$right-container-width: 28%;
+.popup-container {
+    position: fixed;
+    left: calc(50% - #{$right-container-width}/2);
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+}
+
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: calc(100% - #{$right-container-width});
+    background-color: rgba($color: $bg-side, $alpha: 0.7);
+    z-index: 90;
+}
+
+@media print {
+    .popup-container {
+        position: absolute;
+        left: 0;
+        top: 0;
+        transform: none;
+    }
+}

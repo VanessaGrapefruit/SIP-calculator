@@ -1,0 +1,151 @@
+    .calculation-popup {
+        background-color: $bg-second;
+        padding: 40px 48px 27px 36px;
+        color: $font-first;
+        overflow-y: scroll;
+        max-height: 80vh;
+        .header {
+            display: flex;
+            justify-content: space-between;
+            //margin-bottom: 45px;
+            .title {
+                max-width: 40%;
+                font-family: $monserrat-semibold;
+                font-size: 21px;
+                line-height: 28px;
+                letter-spacing: 0.04px;
+            }
+            img {
+                width: 250px;
+                height: 32.5px;
+            }
+        }
+        .number {
+            //margin-bottom: 45px;
+            .name {
+                font-family: $open-sans-semibold;
+                font-size: 16px;
+                line-height: 27px;
+                letter-spacing: 0.03px;
+                margin-bottom: 10px;
+            }
+            .description {
+                font-family: $open-sans-regular;
+                font-size: 12px;
+                line-height: 18px;
+                letter-spacing: 0.02px;
+                opacity: 0.8;
+                margin-bottom: 20px;
+            }
+            .cost-container {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-column-gap: 34px;
+            }
+        }
+        .cost-block {
+            .title {
+                font-family: $open-sans-semibold;
+                font-size: 16px;
+                line-height: 27px;
+                letter-spacing: 0.03px;
+                margin-bottom: 10px;
+            }
+            .cost-wrapper {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                .cost {
+                    background-color: rgba($color: #8E8E8E, $alpha: 0.1);
+                    padding: 15px 10px 20px 28px;
+                    &:nth-child(2) {
+                        border-left: 1px solid rgba($color: #707070, $alpha: 0.2);
+                    }
+                    .price {
+                        font-family: $open-sans-semibold;
+                        font-size: 16px;
+                        line-height: 27px;
+                        letter-spacing: 0.03px;
+                    }
+                    .mark {
+                        font-family: $open-sans-regular;
+                        font-size: 12px;
+                        line-height: 16px;
+                        letter-spacing: 0.02px;
+                    }
+                }
+            }
+        }
+        .package {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-column-gap: 34px;
+            .functions {
+                .func {
+                    font-family: $open-sans-regular;
+                    font-size: 12px;
+                    line-height: 38px;
+                    letter-spacing: 0.02px;
+                }
+                .title {
+                    font-family: $open-sans-semibold;
+                    font-size: 16px;
+                    line-height: 27px;
+                    letter-spacing: 0.03px;
+                }
+            }
+        }
+        .dividing-line {
+            border: 1px solid #707070;
+            opacity: 0.1;
+            height: 0px;
+            margin: 30px 0;
+        }
+        .btns-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-column-gap: 34px;
+            margin-top: 45px;
+            .btns {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                .btn {
+                    background-color: $color-aqua;
+                    color: $bg-second;
+                    padding: 15px;
+                    &:nth-child(2) {
+                        border-left: 1px solid rgba($color: #707070, $alpha: 0.2);
+                    }
+                    .price {
+                        font-family: $open-sans-semibold;
+                        font-size: 16px;
+                        line-height: 27px;
+                        letter-spacing: 0.03px;
+                    }
+                    .mark {
+                        font-family: $open-sans-regular;
+                        font-size: 12px;
+                        line-height: 16px;
+                        letter-spacing: 0.02px;
+                    }
+                }
+            }
+        }
+    }
+    
+    @media print {
+        .calculation-popup {
+            overflow-y: visible;
+            max-height: none;
+            .btns-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                .btns {
+                    .btn {
+                        background-color: rgba($color: #8E8E8E, $alpha: 0.1);
+                        color: $font-first;
+                    }
+                }
+            }
+        }
+    }
