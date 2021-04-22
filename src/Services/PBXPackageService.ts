@@ -1,5 +1,5 @@
 import { PackageSet } from "../Models/PBXPackage";
-//import packageSet from './packages.json';
+import packageSet from './packages.json';
 
 export class PBXPackageService {
     private packageSet: PackageSet;
@@ -14,8 +14,8 @@ export class PBXPackageService {
     }
 
     async getPBXPackages() {
-        if (!this.packageSet) await this.fetchDataFromServer();
-        //if (!this.packageSet) this.packageSet = packageSet;
+        // if (!this.packageSet) await this.fetchDataFromServer();
+        if (!this.packageSet) this.packageSet = packageSet;
         return this.packageSet;
     }
 

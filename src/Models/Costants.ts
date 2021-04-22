@@ -1,5 +1,5 @@
 export const path = {
     public: 'public',
-    //root: 'SIP-calculator/#'
-    root: ''
+    root: 'SIP-calculator'
+    //root: ''
 }

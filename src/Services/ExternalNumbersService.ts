@@ -1,5 +1,5 @@
 import { ExternalNumber } from "../Models/ExternalNumber";
-//import numbers from './numbers.json';
+import numbers from './numbers.json';
 
 export class ExternalNumbersService {
     private numbers: ExternalNumber[];
@@ -14,8 +14,8 @@ export class ExternalNumbersService {
     }
 
     async getExternalNumbers() {
-        if (!this.numbers) await this.fetchDataFromServer();
-        // if (!this.numbers) this.numbers = numbers;
+        // if (!this.numbers) await this.fetchDataFromServer();
+        if (!this.numbers) this.numbers = numbers;
         this.validateNumbers();
         return this.numbers;
     }
