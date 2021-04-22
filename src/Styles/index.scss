@@ -15,8 +15,6 @@ body {
 .left-container {
     background-color: $bg-main;
     width: calc(100% - #{$right-container-width});
-    //overflow-y: scroll;
-    height: 100vh;
     &::-webkit-scrollbar {
         width: 0px;
     }
@@ -67,8 +65,13 @@ body {
                 margin-bottom: 25px;
             }
         }
-        .logo {
-            margin-top: 20px;
+    }
+}
+
+@media(max-width: 1400px) {
+    .left-container {
+        .wrapper {
+            margin: 30px;
         }
     }
 }

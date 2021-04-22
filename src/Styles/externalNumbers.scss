@@ -96,6 +96,14 @@
     }
 }
 
+@media(max-width: 1450px) {
+    .external-numbers__container {
+        grid-template-columns: repeat(2, 1fr);
+        grid-column-gap: 50px;
+        grid-row-gap: 20px;
+    }
+}
+
 @media print {
     .external-numbers__overlay {
         display: none;

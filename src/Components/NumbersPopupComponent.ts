@@ -45,8 +45,7 @@ export class NumberPopupComponent extends PopupComponent {
         const header = renderElement(this.container,'div',['header']);
 
         const img = renderElement(header,'img',[]) as HTMLImageElement;
-        img.src = `${location.origin}/${path.root}/public/images/${this.number.image}`;
-        //img.src = `../${path.public}/images/${this.number.image}`;
+        img.src = `${path.root}/${path.public}/images/${this.number.image}`;
 
         const content = renderElement(header,'div',['content']);
         renderElement(content,'div',['level'],`Уровень ${this.number.level}`);

@@ -59,21 +59,33 @@
             }
         }
     }
-    &-container__table {
-        display: grid;
+    &-container__overlay {
+        padding: 30px 0 30px 30px;
         background-color: $color-white;
         border-radius: 10px;
-        padding: 30px 0 30px 30px;
+    }
+    &-container__table {
+        display: grid;
+        background-color: $bg-main;
+        .func,
+        .package {
+            padding-bottom: 15px;
+        }
+        &>* {
+            background-color: $color-white;
+        }
         .func {
             display: flex;
             justify-content: space-between;
+            align-items: center;
+            max-width: 400px;
             .name {
                 font-family: $open-sans-regular;
                 font-size: 14px;
-                line-height: 38px;
+                line-height: 20px;
                 letter-spacing: 0.03px;
                 color: $font-first;
-                margin-right: 30px;
+                width: 90%;
             }
             .description-mark {
                 width: 32px;
@@ -83,7 +95,7 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                margin-right: 5px;
+                margin: 0 5px;
                 img.mark {
                     width: 8px;
                     height: 8px;
@@ -139,7 +151,7 @@
             line-height: 21px;
             letter-spacing: 0.03px;
             color: $font-first;
-            margin-top: 30px;
+            padding-top: 15px;
             .first {
                 font-family: $open-sans-bold;
             }
@@ -208,9 +220,10 @@
     }
     .package-container__table {
         .func {
-            .name {
-                font-size: 13px;
-                letter-spacing: 0.02px;
+            max-width: 300px;
+            .description-mark {
+                width: 26px;
+                height: 26px;
             }
         }
         .package {
@@ -237,10 +250,30 @@
             padding-bottom: 15px;
         }
         .btn-container {
-            margin-top: 15px;
+            //margin-top: 15px;
             font-size: 12px;
             .add-btn {
                 padding: 10px 25px;
+            }
+        }
+    }
+}
+
+@media(max-width: 1400px) {
+    .package-header {
+        flex-wrap: wrap;
+        .check-container {
+            order: 1;
+            margin-top: 10px;
+            flex-basis: 100%;
+        }
+    }
+    .package-container__table {
+        .func {
+            max-width: 200px;
+            .name {
+                font-size: 13px;
+                letter-spacing: 0.02px;
             }
         }
     }

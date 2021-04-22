@@ -1,4 +1,5 @@
 import { ExternalNumber } from "../Models/ExternalNumber";
+//import numbers from './numbers.json';
 
 export class ExternalNumbersService {
     private numbers: ExternalNumber[];
@@ -14,12 +15,13 @@ export class ExternalNumbersService {
 
     async getExternalNumbers() {
         if (!this.numbers) await this.fetchDataFromServer();
+        // if (!this.numbers) this.numbers = numbers;
         this.validateNumbers();
         return this.numbers;
     }
 
     private async fetchDataFromServer() {
-        const responce = await fetch('http://services.api.bn.by/api/SIPCalculator/GetAllExternalNumbers',{
+        const responce = await fetch('https://services.api.bn.by/api/SIPCalculator/GetAllExternalNumbers',{
             headers: {
                 "Content-Type": "application/json",
                 "access_token": "lzdjkhnglkzdjhrzjklg3249857rsigrsldu4tgh3wlo57rlkj_wsioeu762"

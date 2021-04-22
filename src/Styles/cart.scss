@@ -166,7 +166,7 @@
     }
 }
 
-@media(max-height: 1039px) {
+@media screen and (max-height: 1039px) {
     .cart-container {
         margin: 30px;
         .header {
@@ -229,6 +229,90 @@
             .btn {
                 font-size: 12px;
                 line-height: 16px;
+            }
+        }
+    }
+}
+
+@media screen and (max-height: 800px) {
+    .cart-container {
+        margin: 20px;
+        .header {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        .numbers-container {
+            height: 30vh;
+            .number {
+                .container {
+                    div.image {
+                        padding: 5px;
+                        margin-right: 10px;
+                        img {
+                            width: 61px;
+                            height: 56px;
+                        }
+                    }
+                    .content {
+                        .name {
+                            font-size: 15px;
+                        }
+                        .count {
+                            font-size: 11px;
+                        }
+                    }
+                }
+                .btns-container {
+                    .btn {
+                        padding: 15px;
+                    }
+                }
+            }
+        }
+        .package-container {
+            padding: 15px;
+            .container {
+                &:nth-child(2) {
+                    margin-top: 0;
+                }
+                .title {
+                    font-size: 14px;
+                }
+                .employees {
+                    font-size: 10px;
+                }
+                .description {
+                    font-size: 11px;
+                    line-height: 18px;
+                }
+                .btn {
+                    padding: 15px;
+                    margin: 0 -15px -15px 0;
+                }
+            }
+        }
+        .pay-container {
+            margin-top: 15px;
+            .content {
+                .title {
+                    font-size: 14px;
+                }
+                .desc {
+                    font-size: 10px;
+                }
+            }
+            .value {
+                font-size: 16px;
+            }
+        }
+        .btns-container__summary {
+            bottom: 15px;
+            left: 30px;
+            right: 30px;
+            .btn {
+                font-size: 10px;
+                line-height: 16px;
+                padding: 15px;
             }
         }
     }

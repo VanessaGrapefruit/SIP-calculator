@@ -41,7 +41,7 @@ export class PackagesTableComponent {
     }
 
     renderHeader() {
-        renderElement(this.grid,'div',['func'],'Название функции').id = 'title';
+        renderElement(this.grid,'div',['func'],'Функция').id = 'title';
         for (const pack of this.packagesSet.packages) {
             renderElement(this.grid,'div',['package'],pack.name).id = 'title';
         }
